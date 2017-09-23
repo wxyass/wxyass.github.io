@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="持久化存储," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="SharedPreferences 存储">
+<meta name="keywords" content="持久化存储">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SharedPreferences 存储">
+<meta property="og:url" content="http://yoursite.com/2017/03/29/持久化存储--SharedPreferences-存储/index.html">
+<meta property="og:site_name" content="不忘初心">
+<meta property="og:description" content="SharedPreferences 存储">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-06-21T14:28:55.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SharedPreferences 存储">
+<meta name="twitter:description" content="SharedPreferences 存储">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/03/29/持久化存储--SharedPreferences-存储/"/>
+
+
+
+
+
+  <title>SharedPreferences 存储 | 不忘初心</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">不忘初心</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/29/持久化存储--SharedPreferences-存储/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wxyass">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oss.wxyass.com/avatar/shuai.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不忘初心">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">SharedPreferences 存储</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-29T17:14:28+08:00">
+                2017-03-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/持久化存储/" itemprop="url" rel="index">
+                    <span itemprop="name">持久化存储</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>SharedPreferences 存储  </p>
+</blockquote>
+<a id="more"></a>  
+<p>不同于文件的存储方式，SharedPreferences 是使用键值对的方式来存储数据的。也就是说当保存一条数据的时候，需要给这条数据提供一个对应的键，这样在读取数据的时候就可以通过这个键把相应的值取出来。而且 SharedPreferences 还支持多种不同的数据类型存储，如果存储的数据类型是整型，那么读取出来的数据也是整型的，存储的数据是一个字符串，读取出来的数据仍然是字符串。  </p>
+<p>写一个工具类  </p>
+<pre><code class="java"><span class="keyword">import</span> android.content.Context;
+<span class="keyword">import</span> android.content.SharedPreferences;
+
+<span class="comment">/**</span>
+<span class="comment"> * SharePrefrence的封装</span>
+<span class="comment"> * </span>
+<span class="comment"> * <span class="doctag">@author</span> Kevin</span>
+<span class="comment"> * </span>
+<span class="comment"> */</span>
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PrefUtils</span> </span>{
+
+    <span class="keyword">private</span> <span class="keyword">static</span> SharedPreferences mPrefs;
+
+    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">putBoolean</span><span class="params">(Context ctx, String key, <span class="keyword">boolean</span> value)</span> </span>{
+        <span class="keyword">if</span> (mPrefs == <span class="keyword">null</span>) {
+            mPrefs = ctx.getSharedPreferences(<span class="string">"config"</span>, Context.MODE_PRIVATE);
+        }
+
+        mPrefs.edit().putBoolean(key, value).commit();
+    }
+
+    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">getBoolean</span><span class="params">(Context ctx, String key, <span class="keyword">boolean</span> defValue)</span> </span>{
+        <span class="keyword">if</span> (mPrefs == <span class="keyword">null</span>) {
+            mPrefs = ctx.getSharedPreferences(<span class="string">"config"</span>, Context.MODE_PRIVATE);
+        }
+        <span class="keyword">return</span> mPrefs.getBoolean(key, defValue);
+    }
+
+    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">putString</span><span class="params">(Context ctx, String key, String value)</span> </span>{
+        <span class="keyword">if</span> (mPrefs == <span class="keyword">null</span>) {
+            mPrefs = ctx.getSharedPreferences(<span class="string">"config"</span>, Context.MODE_PRIVATE);
+        }
+        mPrefs.edit().putString(key, value).commit();
+    }
+
+    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getString</span><span class="params">(Context ctx, String key, String defValue)</span> </span>{
+        <span class="keyword">if</span> (mPrefs == <span class="keyword">null</span>) {
+            mPrefs = ctx.getSharedPreferences(<span class="string">"config"</span>, Context.MODE_PRIVATE);
+        }
+        <span class="keyword">return</span> mPrefs.getString(key, defValue);
+    }
+
+    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">putInt</span><span class="params">(Context ctx, String key, <span class="keyword">int</span> value)</span> </span>{
+        <span class="keyword">if</span> (mPrefs == <span class="keyword">null</span>) {
+            mPrefs = ctx.getSharedPreferences(<span class="string">"config"</span>, Context.MODE_PRIVATE);
+        }
+        mPrefs.edit().putInt(key, value).commit();
+    }
+
+    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getInt</span><span class="params">(Context ctx, String key, <span class="keyword">int</span> defValue)</span> </span>{
+        <span class="keyword">if</span> (mPrefs == <span class="keyword">null</span>) {
+            mPrefs = ctx.getSharedPreferences(<span class="string">"config"</span>, Context.MODE_PRIVATE);
+        }
+        <span class="keyword">return</span> mPrefs.getInt(key, defValue);
+    }
+
+    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">(Context ctx, String key)</span> </span>{
+        <span class="keyword">if</span> (mPrefs == <span class="keyword">null</span>) {
+            mPrefs = ctx.getSharedPreferences(<span class="string">"config"</span>, Context.MODE_PRIVATE);
+        }
+
+        mPrefs.edit().remove(key).commit();
+    }
+}
+</code></pre>
+<h4 id="将数据存储到文件中"><a href="#将数据存储到文件中" class="headerlink" title="将数据存储到文件中"></a>将数据存储到文件中</h4><p>Context 类中的 getSharedPreferences()方法  </p>
+<p>此方法接收两个参数，<br>第一个参数用于指定 SharedPreferences 文件的名称，如果指定的文件不存在则会创建一个，SharedPreferences 文件都是存放在/data/data/<packagename>/shared_prefs/目录下的。<br>第二个参数用于指定操作模式，主要有两种模式可以选择，MODE_PRIVATE 和 MODE_MULTI_PROCESS。MODE_PRIVATE 仍然是默认的操作模式，和直接传入 0 效果是相同的，表示只有当前的应用程序才可以对这个SharedPreferences文件进行读写。 MODE_MULTI_PROCESS 则一般是用于会有多个进程中对同一个 SharedPreferences 文件进行读写的情况。  </packagename></p>
+<p>得到了 SharedPreferences 对象之后， 就可以开始向 SharedPreferences 文件中存储数据了，  </p>
+<p>主要可以分为三步实现。  </p>
+<ol>
+<li>调用 SharedPreferences 对象的 edit()方法来获取一个 SharedPreferences.Editor 对象。  </li>
+<li>向 SharedPreferences.Editor 对象中添加数据，比如添加一个布尔型数据就使用 putBoolean 方法，添加一个字符串则使用 putString()方法，以此类推。  </li>
+<li>调用 commit()方法将添加的数据提交，从而完成数据存储操作。  </li>
+</ol>
+<h4 id="从-SharedPreferences-文件中读取数据更加的简单。"><a href="#从-SharedPreferences-文件中读取数据更加的简单。" class="headerlink" title="从 SharedPreferences 文件中读取数据更加的简单。"></a>从 SharedPreferences 文件中读取数据更加的简单。</h4><p>SharedPreferences 对象中提供了一系列的get方法用于对存储的数据进行读取， </p>
+<p>每种get方法都对应了SharedPreferences.Editor 中的一种 put 方法，</p>
+<p>比如:<br>读取一个布尔型数据就使用 getBoolean()方法，<br>读取一个字符串就使用 getString()方法。</p>
+<p>这些 get 方法都接收两个参数，<br>第一个参数是键，传入存储数据时使用的键就可以得到相应的值了，<br>第二个参数是默认值，即表示当传入的键找不到对应的值时，会以什么样的默认值进行返回。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/持久化存储/" rel="tag"># 持久化存储</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/29/持久化存储--文件存储/" rel="next" title="文件存储">
+                <i class="fa fa-chevron-left"></i> 文件存储
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/29/持久化存储--SQLite数据库存储/" rel="prev" title="SQLite数据库存储">
+                SQLite数据库存储 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          
+            <img class="site-author-image" itemprop="image"
+              src="http://oss.wxyass.com/avatar/shuai.jpeg"
+              alt="wxyass" />
+          
+            <p class="site-author-name" itemprop="name">wxyass</p>
+            <p class="site-description motion-element" itemprop="description">该搬砖了</p>
+        </div>
+
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives/">
+            
+                <span class="site-state-item-count">100</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">46</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">36</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#将数据存储到文件中"><span class="nav-number">1.</span> <span class="nav-text">将数据存储到文件中</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#从-SharedPreferences-文件中读取数据更加的简单。"><span class="nav-number">2.</span> <span class="nav-text">从 SharedPreferences 文件中读取数据更加的简单。</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">wxyass</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.2</div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
