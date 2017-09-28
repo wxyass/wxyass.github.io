@@ -77,12 +77,12 @@
 <meta property="og:description" content="参考: http://blog.csdn.net/guolin_blog/article/details/53759439">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://oss.wxyass.com/wxyass/images/1_20170311214131894.gif">
-<meta property="og:image" content="http://oss.wxyass.com/wxyass/images/2_20170312221304074.gif">
+<meta property="og:image" content="http://oss.wxyass.com/wxyass/images/2_20170312221304074.gif"">
 <meta property="og:image" content="http://oss.wxyass.com/wxyass/images/3_20170312223632017.gif">
-<meta property="og:image" content="http://oss.wxyass.com/wxyass/images/4_20170313212451589.gif">
+<meta property="og:image" content="http://oss.wxyass.com/wxyass/images/4_20170313212451589.gif"">
 <meta property="og:image" content="http://oss.wxyass.com/wxyass/images/5_20170313213643310.gif">
 <meta property="og:image" content="http://oss.wxyass.com/wxyass/images/6_20170313214955866.gif">
-<meta property="og:updated_time" content="2017-09-26T06:35:57.619Z">
+<meta property="og:updated_time" content="2017-09-28T01:30:38.044Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android图片加载框架Glide最全解析">
 <meta name="twitter:description" content="参考: http://blog.csdn.net/guolin_blog/article/details/53759439">
@@ -420,8 +420,7 @@
 
 <p>没错，就是这么简单。现在我们来运行一下程序，效果如下图所示：</p>
 
-<center><img src="http://oss.wxyass.com/wxyass/images/1_20170311214131894.gif"></center>
-
+<p><img src="http://oss.wxyass.com/wxyass/images/1_20170311214131894.gif" alt=""></p>
 <p>可以看到，一张网络上的图片已经被成功下载，并且展示到ImageView上了。</p>
 
 <p>而我们到底做了什么？实际上核心的代码就只有这一行而已：</p>
@@ -500,8 +499,7 @@ Glide.with(<span class="hljs-keyword">this</span>).load(imageUri).into(imageView
 <p>现在重新运行一下代码，效果如下图所示：</p>
 
 
-<center><img src="http://oss.wxyass.com/wxyass/images/2_20170312221304074.gif"></center>
-
+<p><img src="http://oss.wxyass.com/wxyass/images/2_20170312221304074.gif&quot;" alt=""></p>
 <p>可以看到，当点击Load Image按钮之后会立即显示一张占位图，然后等真正的图片加载完成之后会将占位图替换掉。</p>
 
 <p>当然，这只是占位图的一种，除了这种加载占位图之外，还有一种异常占位图。异常占位图就是指，如果因为某些异常情况导致图片加载失败，比如说手机网络信号不好，这个时候就显示这张异常占位图。</p>
@@ -522,8 +520,7 @@ Glide.with(<span class="hljs-keyword">this</span>).load(imageUri).into(imageView
 <p>现在你可以将图片的url地址修改成一个不存在的图片地址，或者干脆直接将手机的网络给关了，然后重新运行程序，效果如下图所示：</p>
 
 
-<center><img src="http://oss.wxyass.com/wxyass/images/3_20170312223632017.gif"></center>
-
+<p><img src="http://oss.wxyass.com/wxyass/images/3_20170312223632017.gif" alt=""></p>
 <p>这样我们就把Glide提供的占位图功能都掌握了。</p>
 
 
@@ -541,8 +538,7 @@ Glide.with(<span class="hljs-keyword">this</span>).load(imageUri).into(imageView
 <p>我们只需要将刚才那段加载图片代码中的URL地址替换成上面的地址就可以了，现在重新运行一下代码，效果如下图所示：</p>
 
 
-<center><img src="http://oss.wxyass.com/wxyass/images/4_20170313212451589.gif"></center>
-
+<p><img src="http://oss.wxyass.com/wxyass/images/4_20170313212451589.gif&quot;" alt=""></p>
 <p>也就是说，不管我们传入的是一张普通图片，还是一张GIF图片，Glide都会自动进行判断，并且可以正确地把它解析并展示出来。</p>
 
 <p>但是如果我想指定图片的格式该怎么办呢？就比如说，我希望加载的这张图必须是一张静态图片，我不需要Glide自动帮我判断它到底是静图还是GIF图。</p>
@@ -563,8 +559,7 @@ Glide.with(<span class="hljs-keyword">this</span>).load(imageUri).into(imageView
 
 <p>现在重新运行一下程序，效果如下图所示：</p>
 
-<center><img src="http://oss.wxyass.com/wxyass/images/5_20170313213643310.gif"></center>
-
+<p><img src="http://oss.wxyass.com/wxyass/images/5_20170313213643310.gif" alt=""></p>
 <p>由于调用了asBitmap()方法，现在GIF图就无法正常播放了，而是会在界面上显示第一帧的图片。</p>
 
 <p>那么类似地，既然我们能强制指定加载静态图片，就也能强制指定加载动态图片。比如说我们想要实现必须加载动态图片的功能，就可以这样写：</p>
@@ -583,8 +578,7 @@ Glide.with(<span class="hljs-keyword">this</span>).load(imageUri).into(imageView
 
 <p>那么既然指定了只允许加载动态图片，如果我们传入了一张静态图片的URL地址又会怎么样呢？试一下就知道了，将图片的URL地址改成刚才的必应美图，然后重新运行代码，效果如下图所示。</p>
 
-<center><img src="http://oss.wxyass.com/wxyass/images/6_20170313214955866.gif"></center>
-
+<p><img src="http://oss.wxyass.com/wxyass/images/6_20170313214955866.gif" alt=""></p>
 <p>没错，如果指定了只能加载动态图片，而传入的图片却是一张静图的话，那么结果自然就只有加载失败喽。</p>
 
 
