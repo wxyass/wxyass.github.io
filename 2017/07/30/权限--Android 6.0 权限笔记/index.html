@@ -77,12 +77,12 @@
 <meta property="og:site_name" content="不忘初心">
 <meta property="og:description" content="Android6.0权限笔记   Android开发团队在6.0系统引用了运行时权限的功能,能更好的保护用户的安全和隐私.">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://oss.wxyass.com/wxyass/images/20170730175245.png">
-<meta property="og:updated_time" content="2017-09-22T02:02:09.000Z">
+<meta property="og:image" content="http://images.wxyass.com/wxyass/images/20170730175245.png">
+<meta property="og:updated_time" content="2017-09-29T08:03:01.307Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android 6.0 权限笔记">
 <meta name="twitter:description" content="Android6.0权限笔记   Android开发团队在6.0系统引用了运行时权限的功能,能更好的保护用户的安全和隐私.">
-<meta name="twitter:image" content="http://oss.wxyass.com/wxyass/images/20170730175245.png">
+<meta name="twitter:image" content="http://images.wxyass.com/wxyass/images/20170730175245.png">
 
 
 
@@ -432,7 +432,7 @@ makeCall.setOnClickListener(new View.OnClickListener() {
 });
 </code></pre><p>这样我们就将拨打电话的功能成功实现了,并且在<font color="#FF0000">低于Android 6.0 系统的手机</font>都是可以<font color="#FF0000">正常运行</font>的. </p>
 <p>但是如果我们在<font color="#FF0000">6.0 或者更高版本系统的手机</font>上运行,点击按钮就<font color="#FF0000">没有任何效果</font>,观察日志:  </p>
-<p><img src="http://oss.wxyass.com/wxyass/images/20170730175245.png" alt=""></p>
+<p><img src="http://images.wxyass.com/wxyass/images/20170730175245.png" alt=""></p>
 <p>错误信息中提醒我们”Permission Denial”, 可以看出,是由于权限被禁止导致的, 因为 6.0 及以上系统在使用危险权限时都必须进行运行时权限处理.  </p>
 <p>下面我们尝试修复这个问题, 修改 MainActivity 中的代码:    </p>
 <pre><code>public class MainActivity extends AppCompatActivity {

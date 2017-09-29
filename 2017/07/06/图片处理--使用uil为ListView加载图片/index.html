@@ -77,13 +77,13 @@
 <meta property="og:site_name" content="不忘初心">
 <meta property="og:description" content="一个简单的Listview，然后里面item就是一张图片，希望很流畅的加载网络图片，然后滑动的时候不会出现卡顿，也不会出现OOM现象。在断开网络连接的时候，点击listview的item，进入到图片详情界面，依旧能够加载出完整的图片。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://oss.wxyass.com/wxyass/images/20170706143244.png">
-<meta property="og:image" content="http://oss.wxyass.com/wxyass/images/20170706154902.png">
-<meta property="og:updated_time" content="2017-09-26T05:06:50.469Z">
+<meta property="og:image" content="http://images.wxyass.com/wxyass/images/20170706143244.png">
+<meta property="og:image" content="http://images.wxyass.com/wxyass/images/20170706154902.png">
+<meta property="og:updated_time" content="2017-09-29T08:05:25.937Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用uil为ListView加载图片">
 <meta name="twitter:description" content="一个简单的Listview，然后里面item就是一张图片，希望很流畅的加载网络图片，然后滑动的时候不会出现卡顿，也不会出现OOM现象。在断开网络连接的时候，点击listview的item，进入到图片详情界面，依旧能够加载出完整的图片。">
-<meta name="twitter:image" content="http://oss.wxyass.com/wxyass/images/20170706143244.png">
+<meta name="twitter:image" content="http://images.wxyass.com/wxyass/images/20170706143244.png">
 
 
 
@@ -449,7 +449,7 @@ public class MyApplication extends Application {
             android:screenOrientation=&quot;portrait&quot; /&gt;
     &lt;/application&gt;
 &lt;/manifest&gt;
-</code></pre><h4 id="二-工程整体目录-如图"><a href="#二-工程整体目录-如图" class="headerlink" title="二 工程整体目录,如图"></a>二 工程整体目录,如图</h4><p><img src="http://oss.wxyass.com/wxyass/images/20170706143244.png" alt="">   </p>
+</code></pre><h4 id="二-工程整体目录-如图"><a href="#二-工程整体目录-如图" class="headerlink" title="二 工程整体目录,如图"></a>二 工程整体目录,如图</h4><p><img src="http://images.wxyass.com/wxyass/images/20170706143244.png" alt="">   </p>
 <h4 id="三-创建ListView的适配器"><a href="#三-创建ListView的适配器" class="headerlink" title="三 创建ListView的适配器"></a>三 创建ListView的适配器</h4><pre><code>import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -620,7 +620,7 @@ public class ImageActivity extends AppCompatActivity {
         /&gt;
 &lt;/RelativeLayout&gt;  
 </code></pre><h4 id="最后-总结"><a href="#最后-总结" class="headerlink" title="最后 总结"></a>最后 总结</h4><p>通过在MyApplication中进行参数配置,做了内存缓存和硬盘缓存,当手机上图片正常显示,说明已缓存.          </p>
-<p><img src="http://oss.wxyass.com/wxyass/images/20170706154902.png" alt="">  </p>
+<p><img src="http://images.wxyass.com/wxyass/images/20170706154902.png" alt="">  </p>
 <p>此时即便没有网络,图片也能正常显示.   </p>
 <p>缓存策略的流程就是：<br>每次加载图片的时候都优先去内存缓存当中读取，当读取不到的时候则回去硬盘缓存中读取，而如果硬盘缓存仍然读取不到的话，就从网络上请求原始数据</p>
 <p><a href="http://oss.wxyass.com/wxyass/demo/TPListViewByUil.rar" target="_blank" rel="external">本文源码下载</a>  </p>
