@@ -242,6 +242,170 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/10/升级报错--Make-sure-the-Cursor-is-initialized-correctly-before-accessing-data-from-it/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wxyass">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oss.wxyass.com/avatar/shuai.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不忘初心">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/10/升级报错--Make-sure-the-Cursor-is-initialized-correctly-before-accessing-data-from-it/" itemprop="url">Make sure the Cursor is initialized correctly before accessing data from it.</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-10T20:01:13+08:00">
+                2017-11-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/升级报错/" itemprop="url" rel="index">
+                    <span itemprop="name">升级报错</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>详细错误是：<br>java.lang.IllegalStateException: Couldn’t read row 0, col 2 from CursorWindow.  Make sure the Cursor is initialized correctly before accessing data from it.<br>出现这个原因是因为我在获取Cursor中的字段时，获取了一个不存在的字段，例如，我原本要获取数据库book表中的bookId字段，结果获取的时候写成了bookiD，</p>
+<pre><code>while (cursor.moveToNext()) {  
+      int bookId = cursor.getInt(cursor.getColumnIndex(&quot;bookiD&quot;));          
+}
+</code></pre><p>注意：Android是区分大小写的，所以我们在获取的时候也要严格按照数据库表字段的大小写来获取数据；  </p>
+<p>问题出现比如: 创建数据库表时,字段都是大写  </p>
+<pre><code>CREATE TABLE MST_GROUPPRODUCT_M (
+    GPRODUCTID VARCHAR2(36), 
+    TERMINALCODE VARCHAR2(20), 
+    TERMINALNAME VARCHAR2(500), 
+    IFRECSTAND CHAR(1), 
+    STARTDATE DATE, 
+    ENDDATE DATE, 
+    CREATEUSERENG VARCHAR2(30), 
+    CREATEDATE DATE , 
+    UPDATEUSERENG VARCHAR2(30), 
+    UPDATETIME DATE, 
+    UPLOADFLAG VARCHAR(30), 
+    PADISCONSISTENT VARCHAR(30))
+</code></pre><p>但在读取的时候,用小写字母读取的  </p>
+<pre><code>while (cursor.moveToNext()) {  
+      int bookId = cursor.getInt(cursor.getColumnIndex(&quot;gproductid&quot;));          
+}
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/03/Android Studio介绍--Github上提交代码/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2246,153 +2410,6 @@ compile &apos;com.android.support:recyclerview-v7:26.0.0-alpha1&apos;
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/08/图片处理--Android图片压缩终极解决方案/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="wxyass">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://oss.wxyass.com/avatar/shuai.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="不忘初心">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/09/08/图片处理--Android图片压缩终极解决方案/" itemprop="url">Android图片压缩终极解决方案</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-08T11:47:29+08:00">
-                2017-09-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/图片处理/" itemprop="url" rel="index">
-                    <span itemprop="name">图片处理</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>转载: <a href="http://blog.csdn.net/lsyz0021/article/details/51297269#comments" target="_blank" rel="external">http://blog.csdn.net/lsyz0021/article/details/51297269#comments</a>  </p>
-<p>没错，第一篇技术博客就给大家带来一重磅炸弹，绝对实用，图片压缩，在这里你将看到2.5M如何无损的变为200多kb,差不多十分之一吧，重点，请注意重点，无损，无损，无损！</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/09/08/图片处理--Android图片压缩终极解决方案/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2446,7 +2463,7 @@ compile &apos;com.android.support:recyclerview-v7:26.0.0-alpha1&apos;
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">109</span>
+                <span class="site-state-item-count">110</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2457,7 +2474,7 @@ compile &apos;com.android.support:recyclerview-v7:26.0.0-alpha1&apos;
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">48</span>
+                <span class="site-state-item-count">49</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -2468,7 +2485,7 @@ compile &apos;com.android.support:recyclerview-v7:26.0.0-alpha1&apos;
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-count">42</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -2510,7 +2527,7 @@ compile &apos;com.android.support:recyclerview-v7:26.0.0-alpha1&apos;
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
