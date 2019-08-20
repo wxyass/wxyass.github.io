@@ -1,0 +1,1405 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="ListView," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="目前下拉刷新已经满大街都是，在自己的应用如果不使用这个模式的话，出门都不好意思和人家打招呼.">
+<meta name="keywords" content="ListView">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ListView上拉加载下拉刷新">
+<meta property="og:url" content="http://yoursite.com/2017/07/06/ListView--ListView上拉加载下拉刷新/index.html">
+<meta property="og:site_name" content="不忘初心">
+<meta property="og:description" content="目前下拉刷新已经满大街都是，在自己的应用如果不使用这个模式的话，出门都不好意思和人家打招呼.">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://images.wxyass.com/wxyass/images/20170707112738.png">
+<meta property="og:image" content="http://images.wxyass.com/wxyass/images/20170707113145.png">
+<meta property="og:image" content="http://images.wxyass.com/wxyass/images/20170708181820.png">
+<meta property="og:image" content="http://images.wxyass.com/wxyass/images/20170708182459.png">
+<meta property="og:image" content="http://images.wxyass.com/wxyass/images/20170708185730.png">
+<meta property="og:image" content="http://images.wxyass.com/wxyass/images/20170708184403.png">
+<meta property="og:image" content="http://images.wxyass.com/wxyass/images/20170708191158.png">
+<meta property="og:image" content="http://images.wxyass.com/wxyass/images/20170708191631.png">
+<meta property="og:image" content="http://images.wxyass.com/wxyass/images/20170708191904.png">
+<meta property="og:updated_time" content="2017-09-29T08:02:31.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ListView上拉加载下拉刷新">
+<meta name="twitter:description" content="目前下拉刷新已经满大街都是，在自己的应用如果不使用这个模式的话，出门都不好意思和人家打招呼.">
+<meta name="twitter:image" content="http://images.wxyass.com/wxyass/images/20170707112738.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/07/06/ListView--ListView上拉加载下拉刷新/"/>
+
+
+
+
+
+  <title>ListView上拉加载下拉刷新 | 不忘初心</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">不忘初心</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/06/ListView--ListView上拉加载下拉刷新/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wxyass">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oss.wxyass.com/avatar/shuai.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不忘初心">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">ListView上拉加载下拉刷新</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-06T17:04:50+08:00">
+                2017-07-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ListView/" itemprop="url" rel="index">
+                    <span itemprop="name">ListView</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>目前下拉刷新已经满大街都是，在自己的应用如果不使用这个模式的话，出门都不好意思和人家打招呼.  </p>
+<a id="more"></a>  
+<p>参考:  </p>
+<p><a href="https://github.com/liaohuqiu/android-Ultra-Pull-To-Refresh" target="_blank" rel="external">官方Github地址</a><br><a href="https://github.com/liaohuqiu/android-Ultra-Pull-To-Refresh/blob/master/README-cn.md" target="_blank" rel="external">官方中文版文档</a><br><a href="https://android-ultra-ptr.liaohuqiu.net/cn/" target="_blank" rel="external">原作者的分析</a>  </p>
+<p>轮子的制造原理就不说了,网上很多,或许以后会懂,现在的关键是如何使用轮子  </p>
+<h4 id="一-下载aar文件-并导入工程"><a href="#一-下载aar文件-并导入工程" class="headerlink" title="一 下载aar文件,并导入工程"></a>一 下载aar文件,并导入工程</h4><p>1 下载aar文件   </p>
+<ol>
+<li><a href="https://oss.sonatype.org/content/repositories/releases/in/srain/cube/ultra-ptr/1.0.11/" target="_blank" rel="external">原作者官方下载</a> ultra-ptr-1.0.11.aar      </li>
+<li><a href="http://oss.wxyass.com/wxyass/jar/ultra-ptr-1.0.11.aar" target="_blank" rel="external">个人备份下载</a>   ultra-ptr-1.0.11.aar  </li>
+</ol>
+<p>2 导入工程libs文件夹,并修改build.gradle代码.     </p>
+<pre><code>repositories {
+    flatDir {
+        dirs &apos;libs&apos;
+    }
+}
+-------------------------------------------
+compile(name:&apos;ultra-ptr-1.0.11&apos;,ext:&apos;aar&apos;)   
+</code></pre><p>如图:<br><img src="http://images.wxyass.com/wxyass/images/20170707112738.png" alt="">     </p>
+<p>3 Sync Gradle 一下<br><img src="http://images.wxyass.com/wxyass/images/20170707113145.png" alt="">  </p>
+<h4 id="二-之前写过一个简单listview的使用-在此基础做下拉刷新"><a href="#二-之前写过一个简单listview的使用-在此基础做下拉刷新" class="headerlink" title="二 之前写过一个简单listview的使用,在此基础做下拉刷新"></a>二 之前写过一个简单listview的使用,在此基础做下拉刷新</h4><p><a href="http://wxyass.com/2017/07/06/UIL--%E4%BD%BF%E7%94%A8uil%E4%B8%BAListView%E5%8A%A0%E8%BD%BD%E5%9B%BE%E7%89%87/" target="_blank" rel="external">使用uil为ListView加载图片</a><br>将代码移植到本工程   </p>
+<h5 id="2-1-将ListView控件用PtrClassicFrameLayout包起来"><a href="#2-1-将ListView控件用PtrClassicFrameLayout包起来" class="headerlink" title="2.1  将ListView控件用PtrClassicFrameLayout包起来"></a>2.1  将ListView控件用PtrClassicFrameLayout包起来</h5><pre><code>&lt;RelativeLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+                xmlns:tools=&quot;http://schemas.android.com/tools&quot;
+                android:layout_width=&quot;match_parent&quot;
+                android:layout_height=&quot;match_parent&quot;
+    &gt;
+
+    &lt;in.srain.cube.views.ptr.PtrClassicFrameLayout
+        android:id=&quot;@+id/ptr&quot;
+        android:layout_width=&quot;match_parent&quot;
+        android:layout_height=&quot;match_parent&quot;
+        &gt;
+
+        &lt;ListView
+            android:id=&quot;@+id/listview&quot;
+            android:layout_width=&quot;match_parent&quot;
+            android:layout_height=&quot;match_parent&quot;
+            android:layout_marginBottom=&quot;10dp&quot;
+            android:descendantFocusability=&quot;beforeDescendants&quot;
+            android:dividerHeight=&quot;1dp&quot;
+            android:footerDividersEnabled=&quot;false&quot;/&gt;
+    &lt;/in.srain.cube.views.ptr.PtrClassicFrameLayout&gt;
+
+&lt;/RelativeLayout&gt;
+</code></pre><h5 id="2-2-修改MainActivity中的代码"><a href="#2-2-修改MainActivity中的代码" class="headerlink" title="2.2 修改MainActivity中的代码"></a>2.2 修改MainActivity中的代码</h5><pre><code class="java">ptr = (PtrClassicFrameLayout) findViewById(R.id.ptr);
+<span class="comment">//2设置刷新回调</span>
+ptr.setPtrHandler(<span class="keyword">new</span> PtrDefaultHandler() {
+
+    <span class="comment">// 在这个方法回调中加载新数据,并关闭动画</span>
+    <span class="meta">@Override</span>
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onRefreshBegin</span><span class="params">(PtrFrameLayout ptrFrameLayout)</span> </span>{
+        <span class="comment">// 获取新数据</span>
+        count  = end;
+        end = count+num;
+        getData();
+        adapter.notifyDataSetChanged();
+        <span class="comment">// 关闭下拉刷新的动画</span>
+        ptr.refreshComplete();
+    }
+
+    <span class="comment">//1 将listview传入</span>
+    <span class="meta">@Override</span>
+    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">checkCanDoRefresh</span><span class="params">(PtrFrameLayout frame, View content, View header)</span> </span>{
+        <span class="keyword">return</span> <span class="keyword">super</span>.checkCanDoRefresh(frame, listview, header);
+    }
+});
+</code></pre>
+<p>通过findViewById先找到PtrClassicFrameLayout控件,然后设置刷新回调,<br>在checkCanDoRefresh方法中将listview传进去,<br>在onRefreshBegin方法中获取新的数据并关闭下拉刷新的动画.      </p>
+<p>在onRefreshBegin方法中要根据产品的需求去获取数据, 需要跟产品和后台商量好到底刷新什么数据.    </p>
+<p>注意:下拉刷新的动画是ptr框架自带的,若觉得不好看,可自己去他的原码修改,或者通过其提供的api自定义头部修改.      </p>
+<h5 id="2-3-以上就是最简单的下拉刷新使用"><a href="#2-3-以上就是最简单的下拉刷新使用" class="headerlink" title="2.3 以上就是最简单的下拉刷新使用"></a>2.3 以上就是最简单的下拉刷新使用</h5><h4 id="三-自定义下拉刷新时的头部动画"><a href="#三-自定义下拉刷新时的头部动画" class="headerlink" title="三 自定义下拉刷新时的头部动画"></a>三 自定义下拉刷新时的头部动画</h4><h5 id="3-1-自定义头部动画-工程目录如图"><a href="#3-1-自定义头部动画-工程目录如图" class="headerlink" title="3.1 自定义头部动画,工程目录如图:"></a>3.1 自定义头部动画,工程目录如图:</h5><p><img src="http://images.wxyass.com/wxyass/images/20170708181820.png" alt=""></p>
+<h5 id="3-2-附上CircleView的代码"><a href="#3-2-附上CircleView的代码" class="headerlink" title="3.2 附上CircleView的代码"></a>3.2 附上CircleView的代码</h5><pre><code class="java"><span class="keyword">import</span> android.content.Context;
+<span class="keyword">import</span> android.graphics.Canvas;
+<span class="keyword">import</span> android.graphics.Color;
+<span class="keyword">import</span> android.graphics.Paint;
+<span class="keyword">import</span> android.graphics.RectF;
+<span class="keyword">import</span> android.util.AttributeSet;
+<span class="keyword">import</span> android.util.TypedValue;
+<span class="keyword">import</span> android.view.View;
+
+<span class="comment">/**</span>
+<span class="comment"> * CircleView 圆盘控件，可以旋转</span>
+<span class="comment"> * Created by wxyass.</span>
+<span class="comment"> */</span>
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CircleView</span> <span class="keyword">extends</span> <span class="title">View</span> </span>{
+
+    <span class="comment">/**</span>
+<span class="comment">     * 控件的半径</span>
+<span class="comment">     */</span>
+    <span class="keyword">private</span> <span class="keyword">int</span> mRadius;
+
+    <span class="comment">/**</span>
+<span class="comment">     * 绘制弧形的画笔</span>
+<span class="comment">     */</span>
+    <span class="keyword">private</span> Paint mArcPaint;
+
+    <span class="comment">/**</span>
+<span class="comment">     * 绘制弧形的区域</span>
+<span class="comment">     */</span>
+    <span class="keyword">private</span> RectF mRange;
+
+
+    <span class="keyword">private</span> <span class="keyword">int</span>[] colors = {Color.RED, Color.BLUE, Color.YELLOW, Color.GREEN};
+
+    <span class="function"><span class="keyword">public</span> <span class="title">CircleView</span><span class="params">(Context context)</span> </span>{
+        <span class="keyword">this</span>(context, <span class="keyword">null</span>, <span class="number">0</span>);
+    }
+
+    <span class="function"><span class="keyword">public</span> <span class="title">CircleView</span><span class="params">(Context context, AttributeSet attrs)</span> </span>{
+        <span class="keyword">this</span>(context, attrs, <span class="number">0</span>);
+    }
+
+    <span class="function"><span class="keyword">public</span> <span class="title">CircleView</span><span class="params">(Context context, AttributeSet attrs, <span class="keyword">int</span> defStyleAttr)</span> </span>{
+        <span class="keyword">super</span>(context, attrs, defStyleAttr);
+
+        init();
+    }
+
+    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>{
+        mArcPaint = <span class="keyword">new</span> Paint();
+        mArcPaint.setAntiAlias(<span class="keyword">true</span>);
+        mArcPaint.setDither(<span class="keyword">true</span>);
+        mArcPaint.setStyle(Paint.Style.FILL);
+    }
+
+    <span class="meta">@Override</span>
+    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onMeasure</span><span class="params">(<span class="keyword">int</span> widthMeasureSpec, <span class="keyword">int</span> heightMeasureSpec)</span> </span>{
+        <span class="keyword">super</span>.onMeasure(widthMeasureSpec, heightMeasureSpec);
+
+        <span class="keyword">int</span> width = <span class="number">0</span>;
+        <span class="keyword">int</span> height = <span class="number">0</span>;
+
+        <span class="keyword">int</span> widthSize = MeasureSpec.getSize(widthMeasureSpec);
+        <span class="keyword">int</span> widthMode = MeasureSpec.getMode(widthMeasureSpec);
+
+        <span class="keyword">int</span> heightSize = MeasureSpec.getSize(heightMeasureSpec);
+        <span class="keyword">int</span> heightMode = MeasureSpec.getMode(heightMeasureSpec);
+
+
+        <span class="keyword">if</span> (widthMode == MeasureSpec.EXACTLY) {
+            width = widthSize;
+        } <span class="keyword">else</span> {
+            width = (<span class="keyword">int</span>) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, <span class="number">45</span>, getResources().getDisplayMetrics());
+        }
+
+        <span class="keyword">if</span> (heightMode == MeasureSpec.EXACTLY) {
+            height = heightSize;
+        } <span class="keyword">else</span> {
+            height = (<span class="keyword">int</span>) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, <span class="number">45</span>, getResources().getDisplayMetrics());
+        }
+
+        <span class="comment">//获取半径</span>
+        mRadius = Math.min(width, height) / <span class="number">2</span>;
+        <span class="comment">/**</span>
+<span class="comment">         * 设置宽高为固定值</span>
+<span class="comment">         */</span>
+        setMeasuredDimension(mRadius * <span class="number">2</span>, mRadius * <span class="number">2</span>);
+
+         mRange = <span class="keyword">new</span> RectF(<span class="number">0</span>, <span class="number">0</span>, mRadius * <span class="number">2</span>, mRadius * <span class="number">2</span>);
+    }
+
+
+    <span class="meta">@Override</span>
+    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDraw</span><span class="params">(Canvas canvas)</span> </span>{
+
+        <span class="keyword">float</span> degree = <span class="number">360</span>/colors.length/<span class="number">2f</span>;
+
+        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">8</span>; i++) {
+            mArcPaint.setColor(colors[i%<span class="number">4</span>]);
+            canvas.drawArc(mRange,-<span class="number">90f</span>+degree*i,degree,<span class="keyword">true</span>,mArcPaint);
+        }
+
+    }
+}
+</code></pre>
+<h5 id="3-3-附上CustomUltraRefreshHeader的代码"><a href="#3-3-附上CustomUltraRefreshHeader的代码" class="headerlink" title="3.3 附上CustomUltraRefreshHeader的代码"></a>3.3 附上CustomUltraRefreshHeader的代码</h5><pre><code>import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
+import android.content.Context;
+import android.graphics.Color;
+import android.util.AttributeSet;
+import android.util.Log;
+import android.util.TypedValue;
+import android.view.Gravity;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import in.srain.cube.views.ptr.PtrFrameLayout;
+import in.srain.cube.views.ptr.PtrUIHandler;
+import in.srain.cube.views.ptr.indicator.PtrIndicator;
+
+/**
+ *
+ * 自定义刷新的头部
+ * Created by wxyass.
+ */
+public class CustomUltraRefreshHeader extends RelativeLayout implements PtrUIHandler {
+
+    CircleView mCircleView;
+
+    TextView mDescText;
+
+    private ObjectAnimator anim;
+
+    public CustomUltraRefreshHeader(Context context) {
+        this(context,null);
+    }
+
+    public CustomUltraRefreshHeader(Context context, AttributeSet attrs) {
+        this(context, attrs,0);
+    }
+
+    public CustomUltraRefreshHeader(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+
+        initView();
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        setMeasuredDimension(widthMeasureSpec,100);
+    }
+
+    /**
+     * 初始化布局
+     */
+    private void initView() {
+
+        int circlewidth = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 30, getResources().getDisplayMetrics());
+
+        mCircleView = new CircleView(getContext());
+
+        LinearLayout.LayoutParams circleParams = new LinearLayout.LayoutParams(circlewidth,circlewidth);
+
+        mCircleView.setLayoutParams(circleParams);
+
+        mDescText = new TextView(getContext());
+
+        LinearLayout.LayoutParams descParams = new LinearLayout.LayoutParams(circlewidth*3, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+        descParams.gravity = Gravity.CENTER;
+        descParams.setMargins(circlewidth/2,0,0,0);
+        mDescText.setLayoutParams(descParams);
+        mDescText.setTextSize(12);
+        mDescText.setTextColor(Color.GRAY);
+        mDescText.setText(&quot;下拉刷新&quot;);
+
+        //添加线性的父布局
+        LinearLayout ll = new LinearLayout(getContext());
+        LayoutParams llParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        llParams.addRule(CENTER_IN_PARENT);
+        ll.setLayoutParams(llParams);
+        ll.setPadding(10,10,10,10);
+
+        ll.addView(mCircleView);
+        ll.addView(mDescText);
+
+        addView(ll);
+    }
+
+    @Override
+    public void onUIReset(PtrFrameLayout frame) {
+        //重置时，将动画置为初始状态
+        mCircleView.setRotation(0f);
+        Log.i(&quot;info&quot;,&quot;onUIReset&quot;);
+    }
+
+    @Override
+    public void onUIRefreshPrepare(PtrFrameLayout frame) {
+        mDescText.setText(&quot;下拉加载数据&quot;);
+        Log.i(&quot;info&quot;,&quot;onUIRefreshPrepare&quot;);
+    }
+
+    @Override
+    public void onUIRefreshBegin(PtrFrameLayout frame) {
+
+        //开始刷新，启动动画
+        anim = ObjectAnimator.ofFloat(mCircleView, &quot;rotation&quot;, mCircleView.getRotation(), mCircleView.getRotation()+360f)
+                .setDuration(500);
+        anim.setRepeatCount(ValueAnimator.INFINITE);
+        anim.setRepeatMode(ValueAnimator.RESTART);
+        anim.start();
+
+        mDescText.setText(&quot;正在加载数据&quot;);
+        Log.i(&quot;info&quot;,&quot;onUIRefreshBegin&quot;);
+    }
+
+    @Override
+    public void onUIRefreshComplete(PtrFrameLayout frame) {
+        anim.cancel();
+        mDescText.setText(&quot;加载完成&quot;);
+        Log.i(&quot;info&quot;,&quot;onUIRefreshComplete&quot;);
+    }
+
+    @Override
+    public void onUIPositionChange(PtrFrameLayout frame, boolean isUnderTouch, byte status, PtrIndicator ptrIndicator) {
+        int headerHeight = ptrIndicator.getHeaderHeight();//头部的高度
+        int lastPosY = ptrIndicator.getLastPosY();//上一次滑动的Y偏移值
+        int offsetToRefresh = ptrIndicator.getOffsetToRefresh();//舒心需要滑动的偏移量
+        float offsetY = ptrIndicator.getOffsetY();//当前与上一次滑动处理的偏移值
+        int currentPosY = ptrIndicator.getCurrentPosY();//当前系统偏移值
+
+        if (isUnderTouch&amp;&amp;status== PtrFrameLayout.PTR_STATUS_PREPARE) {
+
+            mCircleView.setRotation(currentPosY);
+            if(currentPosY&lt;offsetToRefresh&amp;&amp;lastPosY &gt;= offsetToRefresh){
+                //表示不刷新了
+                mDescText.setText(&quot;下拉加载数据&quot;);
+            }else if(currentPosY&gt;offsetToRefresh&amp;&amp;lastPosY&lt;=offsetToRefresh){
+                mDescText.setText(&quot;松开加载更多&quot;);
+            }
+        }
+
+       /* if (currentPos &lt; mOffsetToRefresh &amp;&amp; lastPos &gt;= mOffsetToRefresh) {
+            if (isUnderTouch &amp;&amp; status == PtrFrameLayout.PTR_STATUS_PREPARE) {*//*
+        Log.i(&quot;info&quot;,&quot;isUnderTouch&quot;+isUnderTouch+&quot;headHeight: &quot;+headerHeight+&quot; lastPosY &quot;+lastPosY+&quot; offsetToRefresh &quot;+offsetToRefresh+&quot; offsetY &quot;+offsetY+&quot; currentPosY &quot;+currentPosY);*/
+    }
+}    
+</code></pre><h5 id="3-4-修改代码-调用自定义头部"><a href="#3-4-修改代码-调用自定义头部" class="headerlink" title="3.4 修改代码,调用自定义头部"></a>3.4 修改代码,调用自定义头部</h5><pre><code>//  自定义头部 下拉刷新时动画UI , 若不想用把下面3行代码注释掉
+//创建我们的自定义头部视图
+CustomUltraRefreshHeader header = new CustomUltraRefreshHeader(this);
+//设置头部视图
+ptr.setHeaderView(header);
+//设置视图修改的回调，因为我们的CustomUltraRefreshHeader实现了PtrUIHandler
+ptr.addPtrUIHandler(header);  
+</code></pre><p>代码修改如图:<br><img src="http://images.wxyass.com/wxyass/images/20170708182459.png" alt=""></p>
+<h5 id="3-5-修改清单文件的name属性-然后重跑项目-查看效果"><a href="#3-5-修改清单文件的name属性-然后重跑项目-查看效果" class="headerlink" title="3.5 修改清单文件的name属性,然后重跑项目,查看效果"></a>3.5 修改清单文件的name属性,然后重跑项目,查看效果</h5><pre><code>&lt;application
+    android:name=&quot;.MyApplication&quot;
+    android:allowBackup=&quot;true&quot;
+    android:icon=&quot;@mipmap/ic_launcher&quot;
+    android:label=&quot;@string/app_name&quot;
+    android:supportsRtl=&quot;true&quot;
+    android:theme=&quot;@style/AppTheme&quot;&gt;
+    &lt;activity android:name=&quot;.UseHeadActivity&quot;&gt;
+        &lt;intent-filter&gt;
+            &lt;action android:name=&quot;android.intent.action.MAIN&quot;/&gt;
+
+            &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot;/&gt;
+        &lt;/intent-filter&gt;
+    &lt;/activity&gt;
+    &lt;activity
+        android:name=&quot;.ImageActivity&quot;
+        android:screenOrientation=&quot;portrait&quot;/&gt;
+&lt;/application&gt;
+</code></pre><h5 id="3-6-新下拉刷新头部效果如下"><a href="#3-6-新下拉刷新头部效果如下" class="headerlink" title="3.6 新下拉刷新头部效果如下"></a>3.6 新下拉刷新头部效果如下</h5><p><img src="http://images.wxyass.com/wxyass/images/20170708185730.png" alt="">    </p>
+<h4 id="四-在框架基础上-自定义listview实现上拉加载更多"><a href="#四-在框架基础上-自定义listview实现上拉加载更多" class="headerlink" title="四 在框架基础上,自定义listview实现上拉加载更多"></a>四 在框架基础上,自定义listview实现上拉加载更多</h4><h5 id="4-1-工程目录如图"><a href="#4-1-工程目录如图" class="headerlink" title="4.1 工程目录如图"></a>4.1 工程目录如图</h5><p><img src="http://images.wxyass.com/wxyass/images/20170708184403.png" alt="">   </p>
+<h5 id="4-2-附上UltraRefreshListener代码"><a href="#4-2-附上UltraRefreshListener代码" class="headerlink" title="4.2 附上UltraRefreshListener代码"></a>4.2 附上UltraRefreshListener代码</h5><pre><code>/**
+ * 数据接口的回调
+ * Created by wxyass.
+ */
+public interface UltraRefreshListener {
+
+    //下拉刷新
+    void onRefresh();
+
+    //上拉加载
+    void addMore();
+}
+</code></pre><h5 id="4-3-附上UltraRefreshListView代码"><a href="#4-3-附上UltraRefreshListView代码" class="headerlink" title="4.3 附上UltraRefreshListView代码"></a>4.3 附上UltraRefreshListView代码</h5><pre><code>import android.content.Context;
+import android.util.AttributeSet;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewParent;
+import android.widget.AbsListView;
+import android.widget.ListView;
+
+import com.wxyass.tpultraptr.R;
+
+import in.srain.cube.views.ptr.PtrClassicFrameLayout;
+import in.srain.cube.views.ptr.PtrFrameLayout;
+import in.srain.cube.views.ptr.PtrHandler;
+
+/**
+ * Created by wxyass.
+ */
+public class UltraRefreshListView extends ListView implements PtrHandler, AbsListView.OnScrollListener {
+
+    private UltraRefreshListener mUltraRefreshListener;
+
+    /**
+     * 底部的布局:正在为您加载更多
+     */
+    private View footView;
+
+
+    /**
+     * 是否正在加载数据
+     */
+    private boolean isLoadData = false;
+
+    /**
+     * 是否是下拉刷新，主要在处理结果时使用
+     */
+    private boolean isRefresh = false;
+
+    public UltraRefreshListView(Context context) {
+        this(context, null);
+    }
+
+    public UltraRefreshListView(Context context, AttributeSet attrs) {
+        this(context, attrs, 0);
+    }
+
+    public UltraRefreshListView(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        //初始化布局，及添加一个跟布局
+        initView();
+    }
+
+    private void initView() {
+        footView = LayoutInflater.from(getContext()).inflate(R.layout.foot_ultra_refresh_listview, null);
+
+        setOnScrollListener(this);
+    }
+
+    // 开始刷新动画
+    @Override
+    public void onRefreshBegin(PtrFrameLayout frame) {
+
+        isLoadData = true;
+        isRefresh = true;
+        //下拉刷新的回调
+        if (mUltraRefreshListener != null) {
+
+            mUltraRefreshListener.onRefresh();
+        }
+    }
+
+    @Override
+    public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
+        //  PtrHandler 的接口回调，是否能够加载数据的判断
+        return !isLoadData &amp;&amp; checkContentCanBePulledDown(frame, content, header);
+    }
+
+    // 从PtrHandler的默认实现类 PtrDefaultHandler中找到的，用以判断是否可以下拉刷新
+    public static boolean checkContentCanBePulledDown(PtrFrameLayout frame, View content, View header) {
+        return !canChildScrollUp(content);
+
+    }
+
+    // 从PtrHandler的默认实现类 PtrDefaultHandler中找到的，用以判断是否可以下拉刷新
+    public static boolean canChildScrollUp(View view) {
+        if (android.os.Build.VERSION.SDK_INT &lt; 14) {
+            if (view instanceof AbsListView) {
+                final AbsListView absListView = (AbsListView) view;
+                return absListView.getChildCount() &gt; 0
+                        &amp;&amp; (absListView.getFirstVisiblePosition() &gt; 0 || absListView.getChildAt(0)
+                        .getTop() &lt; absListView.getPaddingTop());
+            } else {
+                return view.getScrollY() &gt; 0;
+            }
+        } else {
+            return view.canScrollVertically(-1);
+        }
+    }
+
+    /**
+     * 设置ListView的监听回调
+     */
+    public void setUltraRefreshListener(UltraRefreshListener mUltraRefreshListener) {
+        this.mUltraRefreshListener = mUltraRefreshListener;
+    }
+
+    @Override
+    public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+    }
+
+    @Override
+    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+        /*Log.i(&quot;info&quot;,&quot;isLoadData:&quot;+isLoadData+&quot; totalItemCount &quot;+totalItemCount+&quot; firstVisibleItem &quot;+
+                firstVisibleItem+&quot; visibleItemCount &quot;+ visibleItemCount);
+*/
+        //加载更多的判断
+        if (totalItemCount &gt; 1 &amp;&amp; !isLoadData &amp;&amp; totalItemCount == firstVisibleItem + visibleItemCount) {
+            isRefresh = false;
+            isLoadData = true;
+            addFooterView(footView);
+            mUltraRefreshListener.addMore();
+        }
+    }
+
+    //刷新完成的后调用此方法还原布局
+    public void refreshComplete() {
+        isLoadData = false;
+        if (isRefresh) {
+            //获取其父控件，刷新
+            ViewParent parent = getParent();
+            if (parent instanceof PtrClassicFrameLayout) {
+                ((PtrClassicFrameLayout) parent).refreshComplete();
+            }
+        } else {
+            removeFooterView(footView);
+        }
+    }
+}
+</code></pre><h5 id="4-4-附上底部加载更多布局-foot-ultra-refresh-listview-xml"><a href="#4-4-附上底部加载更多布局-foot-ultra-refresh-listview-xml" class="headerlink" title="4.4 附上底部加载更多布局 foot_ultra_refresh_listview.xml"></a>4.4 附上底部加载更多布局 foot_ultra_refresh_listview.xml</h5><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+              android:layout_width=&quot;match_parent&quot;
+              android:layout_height=&quot;wrap_content&quot;
+              android:orientation=&quot;vertical&quot;&gt;
+
+
+    &lt;TextView
+        android:id=&quot;@+id/tv_load&quot;
+        android:layout_width=&quot;wrap_content&quot;
+        android:layout_height=&quot;wrap_content&quot;
+        android:layout_gravity=&quot;center&quot;
+        android:layout_marginBottom=&quot;10dp&quot;
+        android:layout_marginTop=&quot;10dp&quot;
+        android:text=&quot;正在为您加载更多&quot;/&gt;
+
+    &lt;Button
+        android:id=&quot;@+id/btn_load_fail&quot;
+        android:layout_width=&quot;wrap_content&quot;
+        android:layout_height=&quot;wrap_content&quot;
+        android:layout_gravity=&quot;center&quot;
+        android:layout_marginBottom=&quot;10dp&quot;
+        android:layout_marginTop=&quot;10dp&quot;
+        android:text=&quot;重新加载&quot;
+        android:visibility=&quot;gone&quot;/&gt;
+
+&lt;/LinearLayout&gt;
+</code></pre><h5 id="4-5-修改界面布局-用PtrClassicFrameLayout包裹自定义ListView"><a href="#4-5-修改界面布局-用PtrClassicFrameLayout包裹自定义ListView" class="headerlink" title="4.5 修改界面布局,用PtrClassicFrameLayout包裹自定义ListView"></a>4.5 修改界面布局,用PtrClassicFrameLayout包裹自定义ListView</h5><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+              android:layout_width=&quot;match_parent&quot;
+              android:layout_height=&quot;match_parent&quot;
+              android:orientation=&quot;vertical&quot;&gt;
+
+    &lt;in.srain.cube.views.ptr.PtrClassicFrameLayout
+        android:id=&quot;@+id/ultra_ptr&quot;
+        android:layout_width=&quot;match_parent&quot;
+        android:layout_height=&quot;match_parent&quot;&gt;
+
+        &lt;com.wxyass.tpultraptr.RefreshList.view.UltraRefreshListView
+            android:id=&quot;@+id/ultra_lv&quot;
+            android:layout_width=&quot;match_parent&quot;
+            android:layout_height=&quot;match_parent&quot;/&gt;
+
+    &lt;/in.srain.cube.views.ptr.PtrClassicFrameLayout&gt;
+
+&lt;/LinearLayout&gt;
+</code></pre><h5 id="4-6-修改代码-完成下列刷新-上拉加载的回调"><a href="#4-6-修改代码-完成下列刷新-上拉加载的回调" class="headerlink" title="4.6 修改代码,完成下列刷新,上拉加载的回调"></a>4.6 修改代码,完成下列刷新,上拉加载的回调</h5><p>修改上拉加载如图:<br><img src="http://images.wxyass.com/wxyass/images/20170708191158.png" alt="">   </p>
+<p>附上UseRefreshListActivity代码  </p>
+<pre><code>import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
+
+import com.wxyass.tpultraptr.RefreshList.refreshhead.CustomUltraRefreshHeader;
+import com.wxyass.tpultraptr.RefreshList.view.UltraRefreshListView;
+import com.wxyass.tpultraptr.RefreshList.view.UltraRefreshListener;
+
+import java.util.ArrayList;
+
+import in.srain.cube.views.ptr.PtrClassicFrameLayout;
+
+/**
+ * Created by wxyass.
+ */
+public class UseRefreshListActivity extends AppCompatActivity  {
+
+    private PtrClassicFrameLayout mPtrFrame;
+
+    private UltraRefreshListView mLv;
+
+    ImgListAdapter adapter;
+    ArrayList&lt;String&gt; imageUrl;
+
+    int count = 1; // 起始位置
+    int num = 5; // 每次下拉刷新加载几张图片,可自己修改
+    int end = count+ num;// 刷新后的结束位置
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        setContentView(R.layout.activity_listview_ultra);
+
+        imageUrl = new ArrayList&lt;String&gt;();
+        // 初始化数据
+        getData(0);
+
+        //查找控件
+        mPtrFrame = ((PtrClassicFrameLayout) findViewById(R.id.ultra_ptr));
+
+        mLv = ((UltraRefreshListView) findViewById(R.id.ultra_lv));
+
+        //  自定义头部 下拉刷新时动画UI , 若不想用把下面3行代码注释掉
+
+        //创建我们的自定义头部视图
+        CustomUltraRefreshHeader header = new CustomUltraRefreshHeader(this);
+        //设置头部视图
+        mPtrFrame.setHeaderView(header);
+        //设置视图修改的回调，因为我们的CustomUltraRefreshHeader实现了PtrUIHandler
+        mPtrFrame.addPtrUIHandler(header);
+
+
+        //设置数据刷新的会回调，这里需要传入一个PtrHandler, 因为UltraRefreshListView实现了PtrHandler
+        mPtrFrame.setPtrHandler(mLv);
+
+        adapter = new ImgListAdapter(imageUrl, getApplicationContext());
+        mLv.setAdapter(adapter);
+
+
+
+        /* PauseOnScrollListener这个类来控制ListView,GridView滑动过程中停止去加载图片.
+        第一个参数就是我们的图片加载对象ImageLoader,
+        第二个是控制是否在滑动过程中暂停加载图片，如果需要暂停传true就行了，
+        第三个参数控制猛的滑动界面的时候图片是否加载。*/
+        // 在自定义控件OnScrollListener已经对setOnScrollListener做了监听,用于加载更多,这里重写的话,加载更多就不能用了
+        //mLv.setOnScrollListener(new PauseOnScrollListener(ImageLoader.getInstance(), false, true));
+
+        // listview条目的点击事件
+        mLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView&lt;?&gt; parent, View view, int position, long id) {
+                Intent intent = new Intent(getApplicationContext(), ImageActivity.class);
+                intent.putExtra(&quot;url&quot;, imageUrl.get(position));
+                startActivity(intent);
+            }
+        });
+
+        //设置上拉下拉的数据刷新回调接口
+        mLv.setUltraRefreshListener(new UltraRefreshListener() {
+            // 上拉加载
+            @Override
+            public void addMore() {
+                mPtrFrame.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        // 获取新数据
+                        count  = end;
+                        end = count+num;
+                        getData(1);
+                        adapter.notifyDataSetChanged();
+                        // 关闭下拉刷新的动画
+                        stopResh();
+                    }
+                },1000);
+            }
+            // 下拉刷新
+            @Override
+            public void onRefresh() {
+                mPtrFrame.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        // 获取新数据
+                        count  = end;
+                        end = count+num;
+                        getData(0);
+                        adapter.notifyDataSetChanged();
+                        // 关闭下拉刷新的动画
+                        stopResh();
+                    }
+                },1000);
+            }
+
+
+        });
+    }
+
+    String picName = &quot;Pic_000000&quot;;
+    // 获取新数据
+    private void getData(int isRefresh) { // 0下拉刷新, 1上拉加载
+        String imageString;
+        for (int i = count; i &lt; end; i++)
+        {
+            int length = String.valueOf(i).length();
+            imageString = picName.substring(0,picName.length()-length)+i;
+            imageString = &quot;http://oss.wxyass.com/private/images/001/&quot;+imageString+&quot;.jpg&quot;;
+            if(0==isRefresh){
+                imageUrl.add(0,imageString);// http://oss.wxyass.com/private/images/001/Pic_000076.jpg
+            }else{
+                imageUrl.add(imageString);
+            }
+        }
+    }
+    // 关闭动画(下拉刷新的动画)
+    public void stopResh(){
+        mLv.refreshComplete();
+    }
+} 
+</code></pre><h5 id="4-6-修改清单文件的Activity入口-重跑项目-查看效果"><a href="#4-6-修改清单文件的Activity入口-重跑项目-查看效果" class="headerlink" title="4.6 修改清单文件的Activity入口,重跑项目,查看效果."></a>4.6 修改清单文件的Activity入口,重跑项目,查看效果.</h5><p><img src="http://images.wxyass.com/wxyass/images/20170708191631.png" alt="">  </p>
+<h5 id="4-7-效果如下-当加载完成-底部自动隐藏"><a href="#4-7-效果如下-当加载完成-底部自动隐藏" class="headerlink" title="4.7 效果如下,当加载完成,底部自动隐藏"></a>4.7 效果如下,当加载完成,底部自动隐藏</h5><p><img src="http://images.wxyass.com/wxyass/images/20170708191904.png" alt="">  </p>
+<h4 id="五-以上-android-Ultra-Pull-To-Refresh的使用介绍基本这样了"><a href="#五-以上-android-Ultra-Pull-To-Refresh的使用介绍基本这样了" class="headerlink" title="五 以上,android-Ultra-Pull-To-Refresh的使用介绍基本这样了"></a>五 以上,android-Ultra-Pull-To-Refresh的使用介绍基本这样了</h4><p><a href="http://oss.wxyass.com/wxyass/demo/TPultraptr2.rar" target="_blank" rel="external">本文项目源码</a>    </p>
+<p>参考: 网上一些博客讲解<br><a href="http://blog.csdn.net/yanzhenjie1003/article/details/53450488" target="_blank" rel="external">http://blog.csdn.net/yanzhenjie1003/article/details/53450488</a><br><a href="http://blog.csdn.net/lisdye2/article/details/51449716" target="_blank" rel="external">http://blog.csdn.net/lisdye2/article/details/51449716</a><br><a href="http://blog.csdn.net/sbvfhp/article/details/44959917" target="_blank" rel="external">http://blog.csdn.net/sbvfhp/article/details/44959917</a><br><a href="http://blog.csdn.net/mcy478643968/article/details/47401013" target="_blank" rel="external">http://blog.csdn.net/mcy478643968/article/details/47401013</a><br><a href="http://www.cnblogs.com/itgungnir/p/6211021.html" target="_blank" rel="external">http://www.cnblogs.com/itgungnir/p/6211021.html</a><br><a href="http://www.jianshu.com/p/543b4c110b88" target="_blank" rel="external">http://www.jianshu.com/p/543b4c110b88</a>    </p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ListView/" rel="tag"># ListView</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/06/图片处理--使用uil为ListView加载图片/" rel="next" title="使用uil为ListView加载图片">
+                <i class="fa fa-chevron-left"></i> 使用uil为ListView加载图片
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/11/RecyclerView--5.x之RecyclerView的简单使用/" rel="prev" title="5.x之RecyclerView的简单使用">
+                5.x之RecyclerView的简单使用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          
+            <img class="site-author-image" itemprop="image"
+              src="http://oss.wxyass.com/avatar/shuai.jpeg"
+              alt="wxyass" />
+          
+            <p class="site-author-name" itemprop="name">wxyass</p>
+            <p class="site-description motion-element" itemprop="description">该搬砖了</p>
+        </div>
+
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives/">
+            
+                <span class="site-state-item-count">110</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">49</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">42</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#一-下载aar文件-并导入工程"><span class="nav-number">1.</span> <span class="nav-text">一 下载aar文件,并导入工程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二-之前写过一个简单listview的使用-在此基础做下拉刷新"><span class="nav-number">2.</span> <span class="nav-text">二 之前写过一个简单listview的使用,在此基础做下拉刷新</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-将ListView控件用PtrClassicFrameLayout包起来"><span class="nav-number">2.1.</span> <span class="nav-text">2.1  将ListView控件用PtrClassicFrameLayout包起来</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-修改MainActivity中的代码"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 修改MainActivity中的代码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-3-以上就是最简单的下拉刷新使用"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 以上就是最简单的下拉刷新使用</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三-自定义下拉刷新时的头部动画"><span class="nav-number">3.</span> <span class="nav-text">三 自定义下拉刷新时的头部动画</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-自定义头部动画-工程目录如图"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 自定义头部动画,工程目录如图:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-2-附上CircleView的代码"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 附上CircleView的代码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-3-附上CustomUltraRefreshHeader的代码"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 附上CustomUltraRefreshHeader的代码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-4-修改代码-调用自定义头部"><span class="nav-number">3.4.</span> <span class="nav-text">3.4 修改代码,调用自定义头部</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-5-修改清单文件的name属性-然后重跑项目-查看效果"><span class="nav-number">3.5.</span> <span class="nav-text">3.5 修改清单文件的name属性,然后重跑项目,查看效果</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-6-新下拉刷新头部效果如下"><span class="nav-number">3.6.</span> <span class="nav-text">3.6 新下拉刷新头部效果如下</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#四-在框架基础上-自定义listview实现上拉加载更多"><span class="nav-number">4.</span> <span class="nav-text">四 在框架基础上,自定义listview实现上拉加载更多</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#4-1-工程目录如图"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 工程目录如图</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-2-附上UltraRefreshListener代码"><span class="nav-number">4.2.</span> <span class="nav-text">4.2 附上UltraRefreshListener代码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-3-附上UltraRefreshListView代码"><span class="nav-number">4.3.</span> <span class="nav-text">4.3 附上UltraRefreshListView代码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-4-附上底部加载更多布局-foot-ultra-refresh-listview-xml"><span class="nav-number">4.4.</span> <span class="nav-text">4.4 附上底部加载更多布局 foot_ultra_refresh_listview.xml</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-5-修改界面布局-用PtrClassicFrameLayout包裹自定义ListView"><span class="nav-number">4.5.</span> <span class="nav-text">4.5 修改界面布局,用PtrClassicFrameLayout包裹自定义ListView</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-6-修改代码-完成下列刷新-上拉加载的回调"><span class="nav-number">4.6.</span> <span class="nav-text">4.6 修改代码,完成下列刷新,上拉加载的回调</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-6-修改清单文件的Activity入口-重跑项目-查看效果"><span class="nav-number">4.7.</span> <span class="nav-text">4.6 修改清单文件的Activity入口,重跑项目,查看效果.</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-7-效果如下-当加载完成-底部自动隐藏"><span class="nav-number">4.8.</span> <span class="nav-text">4.7 效果如下,当加载完成,底部自动隐藏</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#五-以上-android-Ultra-Pull-To-Refresh的使用介绍基本这样了"><span class="nav-number">5.</span> <span class="nav-text">五 以上,android-Ultra-Pull-To-Refresh的使用介绍基本这样了</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">wxyass</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.2</div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="权限," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="Android6.0权限笔记   Android开发团队在6.0系统引用了运行时权限的功能,能更好的保护用户的安全和隐私.">
+<meta name="keywords" content="权限">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android 6.0 权限笔记">
+<meta property="og:url" content="http://yoursite.com/2017/07/30/权限--Android 6.0 权限笔记/index.html">
+<meta property="og:site_name" content="不忘初心">
+<meta property="og:description" content="Android6.0权限笔记   Android开发团队在6.0系统引用了运行时权限的功能,能更好的保护用户的安全和隐私.">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://images.wxyass.com/wxyass/images/20170730175245.png">
+<meta property="og:updated_time" content="2017-09-29T08:03:01.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android 6.0 权限笔记">
+<meta name="twitter:description" content="Android6.0权限笔记   Android开发团队在6.0系统引用了运行时权限的功能,能更好的保护用户的安全和隐私.">
+<meta name="twitter:image" content="http://images.wxyass.com/wxyass/images/20170730175245.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/07/30/权限--Android 6.0 权限笔记/"/>
+
+
+
+
+
+  <title>Android 6.0 权限笔记 | 不忘初心</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">不忘初心</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/30/权限--Android 6.0 权限笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wxyass">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oss.wxyass.com/avatar/shuai.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不忘初心">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Android 6.0 权限笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-30T17:56:10+08:00">
+                2017-07-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/权限/" itemprop="url" rel="index">
+                    <span itemprop="name">权限</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Android6.0权限笔记  </p>
+<p>Android开发团队在6.0系统引用了运行时权限的功能,能更好的保护用户的安全和隐私.    </p>
+<a id="more"></a>   
+<p>对开发者来说,问题也就来了:       </p>
+<p>1 这种运行时权限如何使用    </p>
+<p>2 对低于6.0系统的软件造成什么影响    </p>
+<p>3 在 Github 上关于权限的封装库推荐   </p>
+<p>4 不想用运行时权限,还想用之前的默认权限,怎么做   </p>
+<hr>
+<p>下面是关于权限的笔记,可能会比较乱     </p>
+<h4 id="一-当手机低于6-0系统"><a href="#一-当手机低于6-0系统" class="headerlink" title="一 当手机低于6.0系统"></a>一 当手机低于6.0系统</h4><p>使用某个权限时(比如:拍照,定位等等),直接在清单文件中配置即可      </p>
+<pre><code>&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+          package=&quot;com.wxyaass.homepermission&quot;&gt;
+
+    &lt;uses-permission android:name=&quot;android.permission.INTERNET&quot; /&gt;
+    &lt;uses-permission android:name=&quot;android.permission.ACCESS_NETWORK_STATE&quot; /&gt;
+    &lt;uses-permission android:name=&quot;android.permission.ACCESS_COARSE_LOCATION&quot; /&gt;
+
+    ...
+
+&lt;/manifest&gt;  
+</code></pre><p>当应用在手机安装成功,则表示这些权限都申请成功了.    </p>
+<h4 id="二-Android-6-0-权限分类"><a href="#二-Android-6-0-权限分类" class="headerlink" title="二 Android 6.0 权限分类"></a>二 Android 6.0 权限分类</h4><p>1 普通权限: 用法不变,还是在清单文件中注册即可,  </p>
+<p>2 危险权限: 除了在清单文件中注册,还要做另外的处理,下面讲.   </p>
+<p>3 特别权限: 很少用,不做介绍  </p>
+<p>Android中有上百种权限,我们如何区分哪些是普通权限,哪些是危险权限呢? 很简单,下面列出9组24个危险权限,除此之外的就都是普通权限.   </p>
+<pre><code class="java">CONTACTS（联系人）  
+  permission:android.permission.WRITE_CONTACTS
+  permission:android.permission.GET_ACCOUNTS
+  permission:android.permission.READ_CONTACTS
+
+PHONE（手机）  
+  permission:android.permission.READ_CALL_LOG
+  permission:android.permission.READ_PHONE_STATE
+  permission:android.permission.CALL_PHONE
+  permission:android.permission.WRITE_CALL_LOG
+  permission:android.permission.USE_SIP
+  permission:android.permission.PROCESS_OUTGOING_CALLS
+  permission:com.android.voicemail.permission.ADD_VOICEMAIL
+
+CALENDAR（日历）   
+  permission:android.permission.READ_CALENDAR
+  permission:android.permission.WRITE_CALENDAR
+
+CAMERA（相机）  
+  permission:android.permission.CAMERA
+
+SENSORS（传感器）  
+  permission:android.permission.BODY_SENSORS
+
+LOCATION（位置）   
+  permission:android.permission.ACCESS_FINE_LOCATION
+  permission:android.permission.ACCESS_COARSE_LOCATION
+
+STORAGE（存储卡）  
+  permission:android.permission.READ_EXTERNAL_STORAGE
+  permission:android.permission.WRITE_EXTERNAL_STORAGE
+
+MICROPHONE（麦克风）  
+  permission:android.permission.RECORD_AUDIO
+
+SMS（短信）  
+  permission:android.permission.READ_SMS
+  permission:android.permission.RECEIVE_WAP_PUSH
+  permission:android.permission.RECEIVE_MMS
+  permission:android.permission.RECEIVE_SMS
+  permission:android.permission.SEND_SMS
+  permission:android.permission.READ_CELL_BROADCASTS
+</code></pre>
+<h4 id="三-以打电话为例-对运行时权限做解析"><a href="#三-以打电话为例-对运行时权限做解析" class="headerlink" title="三 以打电话为例,对运行时权限做解析"></a>三 以打电话为例,对运行时权限做解析</h4><p>因为拨打电话会涉及到用户手机资费问题,因而 CALL_PHONE 这个权限被列为危险权限. 在Android 6.0 系统出现之前, 拨打电话的实现其实非常简单.</p>
+<p>只需在清单文件中注册该权限即可.  </p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+          package=&quot;com.wxyaass.homepermission&quot;&gt;
+
+    &lt;uses-permission android:name=&quot;android.permission.CALL_PHONE&quot; /&gt;
+
+    &lt;application
+       ...
+    &lt;/application&gt;
+
+&lt;/manifest&gt;
+</code></pre><p>可在MainActivity中触发拨打电话的逻辑来测试权限是否申请成功.  </p>
+<pre><code>Button makeCall = (Button)findViewById(R.id.call);
+makeCall.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        try{
+            Intent intent = new Intent(Intent.ACTION_CALL);
+            intent.setData(Uri.parse(&quot;tel:10086&quot;));
+            startActivity(intent);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+});
+</code></pre><p>这样我们就将拨打电话的功能成功实现了,并且在<font color="#FF0000">低于Android 6.0 系统的手机</font>都是可以<font color="#FF0000">正常运行</font>的. </p>
+<p>但是如果我们在<font color="#FF0000">6.0 或者更高版本系统的手机</font>上运行,点击按钮就<font color="#FF0000">没有任何效果</font>,观察日志:  </p>
+<p><img src="http://images.wxyass.com/wxyass/images/20170730175245.png" alt=""></p>
+<p>错误信息中提醒我们”Permission Denial”, 可以看出,是由于权限被禁止导致的, 因为 6.0 及以上系统在使用危险权限时都必须进行运行时权限处理.  </p>
+<p>下面我们尝试修复这个问题, 修改 MainActivity 中的代码:    </p>
+<pre><code>public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        Button makeCall = (Button)findViewById(R.id.call);
+        makeCall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(ContextCompat.checkSelfPermission(MainActivity.this, Manifest.
+                        permission.CALL_PHONE)!=PackageManager.PERMISSION_GRANTED){
+                    ActivityCompat.requestPermissions(MainActivity.this,new
+                            String[]{Manifest.permission.CALL_PHONE},1);
+                }else{
+                    call();;
+                }
+            }
+        });
+    }
+
+    private void call(){
+        try{
+            Intent intent = new Intent(Intent.ACTION_CALL);
+            intent.setData(Uri.parse(&quot;tel:10086&quot;));
+            startActivity(intent);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode){
+            case 1:
+                if(grantResults.length&gt;0 &amp;&amp; grantResults[0]==PackageManager.PERMISSION_GRANTED){
+                    call();
+                }else{
+                    Toast.makeText(this,&quot;你拒绝了拨打电话权限&quot;,Toast.LENGTH_SHORT).show();
+                }
+                break;
+            default:
+                break;
+        }
+    }
+}
+</code></pre><p>第一步就是要先判断用户是不是已经给过我们授权了,<br>借助的是 ContextCompat.checkSelfPermission() 方法. checkSelfPermission() 接收两个参数,第一个参数是Context,第二个参数是具体的权限名,比如打电话的权限名就是 Manifest.permission.CALL_PHONE,<br>然后我们使用方法的返回值和 PackageManager.PERMISSION_GRANTED 做比较,想等就说明用户已经授权,不等就表示用户没有授权.       </p>
+<p>如果已经授权的话就简单了, 直接去执行拨打电话的逻辑操作就可以了, 如果没有授权的话, 则需要调用此方法的调用 ActivityCompat.requestPermissions() 方法来向用户申请授权,  requestPermissions() 方法接收3个参数, 第一个参数要求是 Activity 的实例, 第二个参数是一个 String 数组, 我们把要申请的权限名放在数组中即可, 第三个参数是请求码, 只要是唯一值就可以了, 这里传入了1.    </p>
+<p>调用完  requestPermissions() 方法之后 , 系统会弹出一个权限申请的对话框, 然后用户可以选择同意或拒绝我们的权限申请, 不论哪种结果, 最终都会回调到 onRequestPermissionsResult() 方法中, 而授权的结果会封装到 grantResults 参数当中. 这里我们只需要判断一下最后的授权结果, 如果用户同意的话就调用 call() 方法来拨打电话, 如果用户拒绝的话我们只能放弃操作, 并且弹出一条失败提示.    </p>
+<p>当对话框出现时, 用户选择了拒绝授权, 当再次点击按钮, 仍旧会弹出权限申请的对话框.    </p>
+<p>当用户同意授权,我们就成功进入拨打电话的界面, 之后再次点击按钮就不会再弹出权限申请的对话框了.    </p>
+<h4 id="四-关于权限库的推荐"><a href="#四-关于权限库的推荐" class="headerlink" title="四 关于权限库的推荐"></a>四 关于权限库的推荐</h4><p>RxPermissions<br><a href="https://github.com/tbruyelle/RxPermissions" target="_blank" rel="external">https://github.com/tbruyelle/RxPermissions</a><br>MPermissions<br><a href="https://github.com/hongyangAndroid/MPermissions" target="_blank" rel="external">https://github.com/hongyangAndroid/MPermissions</a><br>PermissionGen<br><a href="https://github.com/lovedise/PermissionGen" target="_blank" rel="external">https://github.com/lovedise/PermissionGen</a>    </p>
+<h4 id="五-自己封装的权限的例子-简单不花哨"><a href="#五-自己封装的权限的例子-简单不花哨" class="headerlink" title="五 自己封装的权限的例子,简单不花哨"></a>五 自己封装的权限的例子,简单不花哨</h4><p><a href="http://oss.wxyass.com/wxyass/demo/MPermissions-master.rar" target="_blank" rel="external">例子下载</a><br>将例子分别跑到4.0和6.0的手机上,会发现明显不同  </p>
+<p>博客参考:<br><a href="http://blog.csdn.net/lmj623565791/article/details/50709663" target="_blank" rel="external">http://blog.csdn.net/lmj623565791/article/details/50709663</a><br><a href="http://blog.csdn.net/li15225271052/article/details/71076350" target="_blank" rel="external">http://blog.csdn.net/li15225271052/article/details/71076350</a>   </p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/权限/" rel="tag"># 权限</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/25/android-inputType常用取值/" rel="next" title="android:inputType常用取值">
+                <i class="fa fa-chevron-left"></i> android:inputType常用取值
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/31/targetSdkVersion--如何选择 compileSdkVersion minSdkVersion 和 targetSdkVersion/" rel="prev" title="如何选择 compileSdkVersion, minSdkVersion 和 targetSdkVersion">
+                如何选择 compileSdkVersion, minSdkVersion 和 targetSdkVersion <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          
+            <img class="site-author-image" itemprop="image"
+              src="http://oss.wxyass.com/avatar/shuai.jpeg"
+              alt="wxyass" />
+          
+            <p class="site-author-name" itemprop="name">wxyass</p>
+            <p class="site-description motion-element" itemprop="description">该搬砖了</p>
+        </div>
+
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives/">
+            
+                <span class="site-state-item-count">110</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">49</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">42</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#一-当手机低于6-0系统"><span class="nav-number">1.</span> <span class="nav-text">一 当手机低于6.0系统</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二-Android-6-0-权限分类"><span class="nav-number">2.</span> <span class="nav-text">二 Android 6.0 权限分类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三-以打电话为例-对运行时权限做解析"><span class="nav-number">3.</span> <span class="nav-text">三 以打电话为例,对运行时权限做解析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#四-关于权限库的推荐"><span class="nav-number">4.</span> <span class="nav-text">四 关于权限库的推荐</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#五-自己封装的权限的例子-简单不花哨"><span class="nav-number">5.</span> <span class="nav-text">五 自己封装的权限的例子,简单不花哨</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">wxyass</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.2</div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
