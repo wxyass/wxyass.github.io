@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="图片处理," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="一个简单的Listview，然后里面item就是一张图片，希望很流畅的加载网络图片，然后滑动的时候不会出现卡顿，也不会出现OOM现象。在断开网络连接的时候，点击listview的item，进入到图片详情界面，依旧能够加载出完整的图片。">
+<meta name="keywords" content="图片处理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用uil为ListView加载图片">
+<meta property="og:url" content="http://yoursite.com/2017/07/06/图片处理/图片处理--使用uil为ListView加载图片/index.html">
+<meta property="og:site_name" content="不忘初心">
+<meta property="og:description" content="一个简单的Listview，然后里面item就是一张图片，希望很流畅的加载网络图片，然后滑动的时候不会出现卡顿，也不会出现OOM现象。在断开网络连接的时候，点击listview的item，进入到图片详情界面，依旧能够加载出完整的图片。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://images.wxyass.com/wxyass/images/20170706143244.png">
+<meta property="og:image" content="http://images.wxyass.com/wxyass/images/20170706154902.png">
+<meta property="og:updated_time" content="2017-09-29T08:05:25.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用uil为ListView加载图片">
+<meta name="twitter:description" content="一个简单的Listview，然后里面item就是一张图片，希望很流畅的加载网络图片，然后滑动的时候不会出现卡顿，也不会出现OOM现象。在断开网络连接的时候，点击listview的item，进入到图片详情界面，依旧能够加载出完整的图片。">
+<meta name="twitter:image" content="http://images.wxyass.com/wxyass/images/20170706143244.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/07/06/图片处理/图片处理--使用uil为ListView加载图片/"/>
+
+
+
+
+
+  <title>使用uil为ListView加载图片 | 不忘初心</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">不忘初心</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/06/图片处理/图片处理--使用uil为ListView加载图片/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wxyass">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oss.wxyass.com/avatar/shuai.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不忘初心">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">使用uil为ListView加载图片</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-06T13:12:00+08:00">
+                2017-07-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/图片处理/" itemprop="url" rel="index">
+                    <span itemprop="name">图片处理</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>一个简单的Listview，然后里面item就是一张图片，希望很流畅的加载网络图片，然后滑动的时候不会出现卡顿，也不会出现OOM现象。<br>在断开网络连接的时候，点击listview的item，进入到图片详情界面，依旧能够加载出完整的图片。  </p>
+<a id="more"></a>    
+<hr>
+<p>Universal-Image-Loader，一个强大的图片加载框架，具有以下的特性：   </p>
+<p>1.多线程下载图片，图片可以来源于网络，文件系统，项目文件夹assets中以及drawable中等<br>2.支持随意的配置ImageLoader，例如线程池，图片下载器，内存缓存策略，硬盘缓存策略，图片显示选项以及其他的一些配置<br>3.支持图片的内存缓存，文件系统缓存或者SD卡缓存<br>4.支持图片下载过程的监听<br>5.根据控件(ImageView)的大小对Bitmap进行裁剪，减少Bitmap占用过多的内存<br>6.较好的控制图片的加载过程，例如暂停图片加载，重新开始加载图片，一般使用在ListView,GridView中，滑动过程中暂停加载图片，停止滑动的时候去加载图片<br>7.提供在较慢的网络下对图片进行加载     </p>
+<h4 id="一-新建工程-前期工作处理好-参考上篇"><a href="#一-新建工程-前期工作处理好-参考上篇" class="headerlink" title="一 新建工程,前期工作处理好,参考上篇"></a>一 新建工程,前期工作处理好,参考上篇</h4><p>1 下载jar包,导入工程    </p>
+<p><a href="https://github.com/nostra13/Android-Universal-Image-Loader" target="_blank" rel="external">原作者Github下载</a>    /downloads/universal-image-loader-1.9.5.jar<br><a href="http://oss.wxyass.com/wxyass/jar/universal-image-loader-1.9.5.jar" target="_blank" rel="external">个人备份下载</a>  universal-image-loader-1.9.5.jar    </p>
+<p>2 创建MyApplication类,配置参数    </p>
+<pre><code>import android.app.Application;
+import android.graphics.Bitmap;
+import android.os.Environment;
+import android.os.Handler;
+
+import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
+import com.nostra13.universalimageloader.cache.disc.naming.HashCodeFileNameGenerator;
+import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+import com.nostra13.universalimageloader.core.decode.BaseImageDecoder;
+import com.nostra13.universalimageloader.core.display.SimpleBitmapDisplayer;
+import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
+
+import java.io.File;
+
+/**
+ * Created by wxyass.
+ */
+public class MyApplication extends Application {
+
+    private MyApplication instance;
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        instance = this;
+        initImageloader();
+    }
+
+    public void initImageloader() {
+        DisplayImageOptions options = new DisplayImageOptions.Builder()
+                .showImageOnLoading(R.drawable.ic_download)
+                .showImageOnFail(R.drawable.ic_download)
+                .resetViewBeforeLoading(false) // default
+                .delayBeforeLoading(0).cacheInMemory(true) // default
+                .cacheOnDisk(true) // default
+                .considerExifParams(true) // default
+                .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2) // default
+                .bitmapConfig(Bitmap.Config.ARGB_8888) // default
+                .displayer(new SimpleBitmapDisplayer()) // default
+                .handler(new Handler()) // default
+                .build();
+
+        File picPath = new File(Environment.getExternalStorageDirectory()
+                .getPath()+ File.separator+ &quot;MyDemo&quot;+ File.separator+ &quot;files&quot;);
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(
+                getApplicationContext())
+                .memoryCacheExtraOptions(480, 800)
+                // default = device screen dimensions
+                .diskCacheExtraOptions(480, 800, null)
+                .threadPoolSize(3)
+                // default
+                .threadPriority(Thread.NORM_PRIORITY - 1)
+                // default
+                .tasksProcessingOrder(QueueProcessingType.FIFO)
+                // default
+                .denyCacheImageMultipleSizesInMemory()
+                .memoryCache(new LruMemoryCache(2 * 1024 * 1024))
+                .memoryCacheSize(2 * 1024 * 1024)
+                .memoryCacheSizePercentage(13)
+                // default
+                .diskCache(new UnlimitedDiskCache(picPath))
+                // default
+                .diskCacheSize(50 * 1024 * 1024)
+                .diskCacheFileCount(1000)
+                .diskCacheFileNameGenerator(new HashCodeFileNameGenerator())
+                // default
+                .imageDownloader(
+                        new BaseImageDownloader(getApplicationContext())) // default
+                .imageDecoder(new BaseImageDecoder(true)) // default
+                .defaultDisplayImageOptions(options) // default
+                .writeDebugLogs().build();
+        ImageLoader.getInstance().init(config);
+    }
+}
+</code></pre><p>3 添加权限<br>4 修改清单文件中application的name属性    </p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+          package=&quot;com.wxyass.tplistviewbyuil&quot;&gt;
+
+    &lt;uses-permission android:name=&quot;android.permission.INTERNET&quot;/&gt;
+    &lt;uses-permission android:name=&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot;/&gt;
+    &lt;uses-permission android:name=&quot;android.permission.READ_EXTERNAL_STORAGE&quot;/&gt;
+
+    &lt;application
+        android:name=&quot;.MyApplication&quot;
+        android:allowBackup=&quot;true&quot;
+        android:icon=&quot;@mipmap/ic_launcher&quot;
+        android:label=&quot;@string/app_name&quot;
+        android:roundIcon=&quot;@mipmap/ic_launcher_round&quot;
+        android:supportsRtl=&quot;true&quot;
+        android:theme=&quot;@style/AppTheme&quot;&gt;
+        &lt;activity android:name=&quot;.MainActivity&quot;&gt;
+            &lt;intent-filter&gt;
+                &lt;action android:name=&quot;android.intent.action.MAIN&quot;/&gt;
+
+                &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot;/&gt;
+            &lt;/intent-filter&gt;
+        &lt;/activity&gt;
+        &lt;activity android:name=&quot;.ImageActivity&quot;
+            android:screenOrientation=&quot;portrait&quot; /&gt;
+    &lt;/application&gt;
+&lt;/manifest&gt;
+</code></pre><h4 id="二-工程整体目录-如图"><a href="#二-工程整体目录-如图" class="headerlink" title="二 工程整体目录,如图"></a>二 工程整体目录,如图</h4><p><img src="http://images.wxyass.com/wxyass/images/20170706143244.png" alt="">   </p>
+<h4 id="三-创建ListView的适配器"><a href="#三-创建ListView的适配器" class="headerlink" title="三 创建ListView的适配器"></a>三 创建ListView的适配器</h4><pre><code>import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+
+import com.nostra13.universalimageloader.core.ImageLoader;
+
+/**
+ * Created by wxyass.
+ */
+
+public class ImgListAdapter extends BaseAdapter {
+
+    private Context context;
+    private LayoutInflater layoutinflater;
+    private String[] imageUrls;
+
+    public ImgListAdapter(String[] urls, Context context) {
+        this.context = context;
+        this.imageUrls = urls;
+        this.layoutinflater = LayoutInflater.from(context);
+    }
+
+    @Override
+    public int getCount() {
+        return imageUrls.length;
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return position;
+    }
+
+    @Override
+    public long getItemId(int id) {
+        return id;
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup viewGroup) {
+        ViewHolder holder;
+        if (convertView == null) {
+            holder = new ViewHolder();
+            convertView = layoutinflater.inflate(R.layout.img_item, null);
+            holder.webImg = (ImageView) convertView.findViewById(R.id.img);
+            convertView.setTag(holder);
+        } else {
+            holder = (ViewHolder) convertView.getTag();
+        }
+        // 通过ImageLoader来获取网络图片
+        ImageLoader.getInstance().displayImage(imageUrls[position], holder.webImg);
+        return convertView;
+    }
+
+    class ViewHolder {
+        public ImageView webImg;
+    }
+}  
+</code></pre><h5 id="3-1-附上listview条目布局"><a href="#3-1-附上listview条目布局" class="headerlink" title="3.1 附上listview条目布局"></a>3.1 附上listview条目布局</h5><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;RelativeLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+                android:id=&quot;@+id/ll_indexstatus_dialog&quot;
+                android:layout_width=&quot;match_parent&quot;
+                android:layout_height=&quot;match_parent&quot;
+    &gt;
+
+    &lt;ImageView
+        android:id=&quot;@+id/img&quot;
+        android:layout_width=&quot;wrap_content&quot;
+        android:layout_height=&quot;150dp&quot;
+        android:layout_centerHorizontal=&quot;true&quot;
+        /&gt;
+&lt;/RelativeLayout&gt;  
+</code></pre><h4 id="四-修改MainActivity代码-为ListView加载图片"><a href="#四-修改MainActivity代码-为ListView加载图片" class="headerlink" title="四 修改MainActivity代码,为ListView加载图片"></a>四 修改MainActivity代码,为ListView加载图片</h4><pre><code>import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
+
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.listener.PauseOnScrollListener;
+
+public class MainActivity extends AppCompatActivity {
+
+    ListView listview;
+    ImgListAdapter adapter;
+    String[] imageuil = new String[]{&quot;http://oss.wxyass.com/private/images/001/Pic_000042.jpg&quot;,
+            &quot;http://oss.wxyass.com/private/images/001/Pic_000045.jpg&quot;,
+            &quot;http://oss.wxyass.com/private/images/001/Pic_000051.jpg&quot;,
+            &quot;http://oss.wxyass.com/private/images/001/Pic_000056.jpg&quot;,
+            &quot;http://oss.wxyass.com/private/images/001/Pic_000061.jpg&quot;,
+            &quot;http://oss.wxyass.com/private/images/001/Pic_000067.jpg&quot;,
+            &quot;http://oss.wxyass.com/private/images/001/Pic_000071.jpg&quot;,
+            &quot;http://oss.wxyass.com/private/images/001/Pic_000076.jpg&quot;,
+            &quot;http://oss.wxyass.com/private/images/001/Pic_000077.jpg&quot;,
+            &quot;http://oss.wxyass.com/private/images/001/Pic_000080.jpg&quot;,
+            &quot;http://oss.wxyass.com/private/images/001/Pic_000085.jpg&quot;};
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        listview = (ListView) findViewById(R.id.listview);
+        adapter = new ImgListAdapter(imageuil, getApplicationContext());
+        listview.setAdapter(adapter);
+        /* PauseOnScrollListener这个类来控制ListView,GridView滑动过程中停止去加载图片.
+        第一个参数就是我们的图片加载对象ImageLoader,
+        第二个是控制是否在滑动过程中暂停加载图片，如果需要暂停传true就行了，
+        第三个参数控制猛的滑动界面的时候图片是否加载。*/
+        listview.setOnScrollListener(new PauseOnScrollListener(ImageLoader.getInstance(), false, true));
+        // listview条目的点击事件
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView&lt;?&gt; parent, View view, int position, long id) {
+                Intent intent = new Intent(getApplicationContext(), ImageActivity.class);
+                intent.putExtra(&quot;url&quot;, imageuil[position]);
+                startActivity(intent);
+            }
+        });
+    }
+}
+</code></pre><h5 id="4-1-附上MainActivity的布局"><a href="#4-1-附上MainActivity的布局" class="headerlink" title="4.1 附上MainActivity的布局"></a>4.1 附上MainActivity的布局</h5><pre><code>&lt;RelativeLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+                xmlns:tools=&quot;http://schemas.android.com/tools&quot;
+                android:layout_width=&quot;match_parent&quot;
+                android:layout_height=&quot;match_parent&quot;
+                 &gt;
+    &lt;ListView
+        android:id=&quot;@+id/listview&quot;
+        android:layout_width=&quot;match_parent&quot;
+        android:layout_height=&quot;match_parent&quot;
+        android:layout_marginBottom=&quot;10dp&quot;
+        android:descendantFocusability=&quot;beforeDescendants&quot;
+        android:dividerHeight=&quot;1dp&quot;
+        android:footerDividersEnabled=&quot;false&quot; /&gt;
+
+&lt;/RelativeLayout&gt;  
+</code></pre><h4 id="五-修改图片详情界面代码-处理item传递过来的数据"><a href="#五-修改图片详情界面代码-处理item传递过来的数据" class="headerlink" title="五 修改图片详情界面代码,处理item传递过来的数据"></a>五 修改图片详情界面代码,处理item传递过来的数据</h4><pre><code>import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.widget.ImageView;
+import com.nostra13.universalimageloader.core.ImageLoader;
+
+public class ImageActivity extends AppCompatActivity {
+
+    ImageView pagerImg;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_image);
+        pagerImg = (ImageView) findViewById(R.id.pager_img);
+        Intent intent = getIntent();
+        Bundle data = intent.getExtras();
+        ImageLoader.getInstance().displayImage((String) data.get(&quot;url&quot;),pagerImg);
+    }
+}  
+</code></pre><h5 id="5-1-附上ImageActivity的布局文件"><a href="#5-1-附上ImageActivity的布局文件" class="headerlink" title="5.1 附上ImageActivity的布局文件"></a>5.1 附上ImageActivity的布局文件</h5><pre><code>&lt;RelativeLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+                xmlns:tools=&quot;http://schemas.android.com/tools&quot;
+                android:layout_width=&quot;match_parent&quot;
+                android:layout_height=&quot;match_parent&quot;
+    &gt;
+    &lt;ImageView
+        android:id=&quot;@+id/pager_img&quot;
+        android:layout_width=&quot;match_parent&quot;
+        android:layout_height=&quot;match_parent&quot;
+        /&gt;
+&lt;/RelativeLayout&gt;  
+</code></pre><h4 id="最后-总结"><a href="#最后-总结" class="headerlink" title="最后 总结"></a>最后 总结</h4><p>通过在MyApplication中进行参数配置,做了内存缓存和硬盘缓存,当手机上图片正常显示,说明已缓存.          </p>
+<p><img src="http://images.wxyass.com/wxyass/images/20170706154902.png" alt="">  </p>
+<p>此时即便没有网络,图片也能正常显示.   </p>
+<p>缓存策略的流程就是：<br>每次加载图片的时候都优先去内存缓存当中读取，当读取不到的时候则回去硬盘缓存中读取，而如果硬盘缓存仍然读取不到的话，就从网络上请求原始数据</p>
+<p><a href="http://oss.wxyass.com/wxyass/demo/TPListViewByUil.rar" target="_blank" rel="external">本文源码下载</a>  </p>
+<p>参考:<br><a href="http://blog.csdn.net/tyk0910/article/details/50375070" target="_blank" rel="external">http://blog.csdn.net/tyk0910/article/details/50375070</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/图片处理/" rel="tag"># 图片处理</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/05/图片处理/图片处理--开源框架Universal-Image-Loader解析/" rel="next" title="开源框架Universal-Image-Loader解析">
+                <i class="fa fa-chevron-left"></i> 开源框架Universal-Image-Loader解析
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/06/ListView/ListView--ListView上拉加载下拉刷新/" rel="prev" title="ListView上拉加载下拉刷新">
+                ListView上拉加载下拉刷新 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          
+            <img class="site-author-image" itemprop="image"
+              src="http://oss.wxyass.com/avatar/shuai.jpeg"
+              alt="wxyass" />
+          
+            <p class="site-author-name" itemprop="name">wxyass</p>
+            <p class="site-description motion-element" itemprop="description">该搬砖了</p>
+        </div>
+
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives/">
+            
+                <span class="site-state-item-count">110</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">49</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">42</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#一-新建工程-前期工作处理好-参考上篇"><span class="nav-number">1.</span> <span class="nav-text">一 新建工程,前期工作处理好,参考上篇</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二-工程整体目录-如图"><span class="nav-number">2.</span> <span class="nav-text">二 工程整体目录,如图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三-创建ListView的适配器"><span class="nav-number">3.</span> <span class="nav-text">三 创建ListView的适配器</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-附上listview条目布局"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 附上listview条目布局</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#四-修改MainActivity代码-为ListView加载图片"><span class="nav-number">4.</span> <span class="nav-text">四 修改MainActivity代码,为ListView加载图片</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#4-1-附上MainActivity的布局"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 附上MainActivity的布局</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#五-修改图片详情界面代码-处理item传递过来的数据"><span class="nav-number">5.</span> <span class="nav-text">五 修改图片详情界面代码,处理item传递过来的数据</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#5-1-附上ImageActivity的布局文件"><span class="nav-number">5.1.</span> <span class="nav-text">5.1 附上ImageActivity的布局文件</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#最后-总结"><span class="nav-number">6.</span> <span class="nav-text">最后 总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">wxyass</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.2</div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

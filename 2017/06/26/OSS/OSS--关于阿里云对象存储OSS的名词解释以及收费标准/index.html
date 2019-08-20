@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="OSS," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="对于图床的选择,个人感觉还是选择大厂吧,起码稳定性有保障.要想了解阿里云对象存储OSS的收费标准, 必须要对对象存储OSS各个名词有所了解.    详情请查看官方文档 , 这里选几个代表性的名词解释下.">
+<meta name="keywords" content="OSS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于阿里云对象存储OSS的名词解释以及收费标准">
+<meta property="og:url" content="http://yoursite.com/2017/06/26/OSS/OSS--关于阿里云对象存储OSS的名词解释以及收费标准/index.html">
+<meta property="og:site_name" content="不忘初心">
+<meta property="og:description" content="对于图床的选择,个人感觉还是选择大厂吧,起码稳定性有保障.要想了解阿里云对象存储OSS的收费标准, 必须要对对象存储OSS各个名词有所了解.    详情请查看官方文档 , 这里选几个代表性的名词解释下.">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://images.wxyass.com/wxyass/images/20170626171347.png">
+<meta property="og:updated_time" content="2017-09-29T07:57:07.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于阿里云对象存储OSS的名词解释以及收费标准">
+<meta name="twitter:description" content="对于图床的选择,个人感觉还是选择大厂吧,起码稳定性有保障.要想了解阿里云对象存储OSS的收费标准, 必须要对对象存储OSS各个名词有所了解.    详情请查看官方文档 , 这里选几个代表性的名词解释下.">
+<meta name="twitter:image" content="http://images.wxyass.com/wxyass/images/20170626171347.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/06/26/OSS/OSS--关于阿里云对象存储OSS的名词解释以及收费标准/"/>
+
+
+
+
+
+  <title>关于阿里云对象存储OSS的名词解释以及收费标准 | 不忘初心</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">不忘初心</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/26/OSS/OSS--关于阿里云对象存储OSS的名词解释以及收费标准/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wxyass">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oss.wxyass.com/avatar/shuai.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不忘初心">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">关于阿里云对象存储OSS的名词解释以及收费标准</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-26T16:45:54+08:00">
+                2017-06-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OSS/" itemprop="url" rel="index">
+                    <span itemprop="name">OSS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>对于图床的选择,个人感觉还是选择大厂吧,起码稳定性有保障.<br>要想了解阿里云对象存储OSS的收费标准, 必须要对对象存储OSS各个名词有所了解.   </p>
+<p>详情请查看<a href="https://help.aliyun.com/product/31815.html?spm=5176.2020520105.146.d500.eZO5ZF" target="_blank" rel="external">官方文档</a> , 这里选几个代表性的名词解释下.     </p>
+<a id="more"></a>
+<hr>
+<h4 id="OSS"><a href="#OSS" class="headerlink" title="OSS"></a>OSS</h4><p>阿里云对象存储服务（Object Storage Service，简称 OSS），是阿里云提供的海量、安全、低成本、高可靠的云存储服务。<br>相当于阿里提供的网盘服务,支持最基本的上传下载,最重要是支持外链.<br>不过OSS的存储空间以及下载时产生的流量都是要收费的.  </p>
+<hr>
+<h4 id="CDN-CDN加速"><a href="#CDN-CDN加速" class="headerlink" title="CDN(CDN加速)"></a>CDN(CDN加速)</h4><p>阿里云内容分发网络（Content Delivery Network，简称阿里CDN）是建立并覆盖在承载网之上、由分布在不同区域的边缘节点服务器群组成的分布式网络，替代传统以WEB Server为中心的数据传输模式。<br>相当于之前只能访问仅有的一个服务器点,现在可以访问就近的服务器点<br>不过就对于个人博客而言, 不需要CDN加速.   </p>
+<hr>
+<h4 id="存储量"><a href="#存储量" class="headerlink" title="存储量"></a>存储量</h4><p>存储量指您占用的存储空间容量。<br><img src="http://images.wxyass.com/wxyass/images/20170626171347.png" alt=""></p>
+<hr>
+<h4 id="流量"><a href="#流量" class="headerlink" title="流量"></a>流量</h4><p>流量指您使用的网络带宽流量累计值，包括外网流出流量、内网流出流量、外网流入流量、内网流入流量、CDN回源流出流量、跨区域复制流量   </p>
+<h5 id="外网流出流量-收费-通过互联网从-OSS-下载数据到本地端所产生的下行流量"><a href="#外网流出流量-收费-通过互联网从-OSS-下载数据到本地端所产生的下行流量" class="headerlink" title="外网流出流量(收费):  通过互联网从 OSS 下载数据到本地端所产生的下行流量"></a>外网流出流量(收费):  通过互联网从 OSS 下载数据到本地端所产生的下行流量</h5><h5 id="内网流出流量-免费-通过阿里云内网从-OSS-下载数据到-ECS-服务器所产生的下行流量"><a href="#内网流出流量-免费-通过阿里云内网从-OSS-下载数据到-ECS-服务器所产生的下行流量" class="headerlink" title="内网流出流量(免费):  通过阿里云内网从 OSS 下载数据到 ECS 服务器所产生的下行流量"></a>内网流出流量(免费):  通过阿里云内网从 OSS 下载数据到 ECS 服务器所产生的下行流量</h5><h5 id="外网流入流量-免费-通过互联网从本地端上传数据到-OSS-所产生的上行流量"><a href="#外网流入流量-免费-通过互联网从本地端上传数据到-OSS-所产生的上行流量" class="headerlink" title="外网流入流量(免费) :  通过互联网从本地端上传数据到 OSS 所产生的上行流量"></a>外网流入流量(免费) :  通过互联网从本地端上传数据到 OSS 所产生的上行流量</h5><h5 id="内网流入流量-免费-通过阿里云内网从-ECS-服务器上传数据到-OSS-所产生的上行流量"><a href="#内网流入流量-免费-通过阿里云内网从-ECS-服务器上传数据到-OSS-所产生的上行流量" class="headerlink" title="内网流入流量(免费) :  通过阿里云内网从 ECS 服务器上传数据到 OSS 所产生的上行流量"></a>内网流入流量(免费) :  通过阿里云内网从 ECS 服务器上传数据到 OSS 所产生的上行流量</h5><h5 id="CDN回源流出流量-收费-通过-CDN-服务层下载-OSS-的数据所产生的回源下行流量"><a href="#CDN回源流出流量-收费-通过-CDN-服务层下载-OSS-的数据所产生的回源下行流量" class="headerlink" title="CDN回源流出流量(收费) :  通过 CDN 服务层下载 OSS 的数据所产生的回源下行流量"></a>CDN回源流出流量(收费) :  通过 CDN 服务层下载 OSS 的数据所产生的回源下行流量</h5><h5 id="跨区域复制流量-收费-使用跨区域复制功能将源-Bucket-的数据同步复制到目标-Bucket-时所产生的流出流量"><a href="#跨区域复制流量-收费-使用跨区域复制功能将源-Bucket-的数据同步复制到目标-Bucket-时所产生的流出流量" class="headerlink" title="跨区域复制流量(收费) : 使用跨区域复制功能将源 Bucket 的数据同步复制到目标 Bucket 时所产生的流出流量"></a>跨区域复制流量(收费) : 使用跨区域复制功能将源 Bucket 的数据同步复制到目标 Bucket 时所产生的流出流量</h5><hr>
+<h4 id="请求次数"><a href="#请求次数" class="headerlink" title="请求次数"></a>请求次数</h4><p>调用 OSS OPEN API 的请求次数。<br>比如: 你的一篇博客中有6张图片(都是使用OSS存储做外链),那么当你打开这篇博客时就产生了6次请求.<br>另外: OSS 控制台操作也是通过 OSS OPEN API 调用实现的，因此使用 OSS 控制台也会产生请求次数。    </p>
+<hr>
+<h4 id="收费案例背景"><a href="#收费案例背景" class="headerlink" title="收费案例背景"></a>收费案例背景</h4><p>小王是一个在杭州的创业者，他带领团队研发了一款基于图片分享的移动应用。希望把图片存储在阿里云上，图片大概 1TB，每月图片下行流量 2TB，每月有1500W 请求次数。小王想要了解怎么搭配阿里云产品使用，才是性价比最优的方式。</p>
+<h4 id="收费案例分析"><a href="#收费案例分析" class="headerlink" title="收费案例分析"></a>收费案例分析</h4><p>以下详细分析三种计费方式：OSS按量付费、OSS包年包月、OSS+CDN组合所需的费用。  </p>
+<blockquote>
+<p>说明：以下单价来自2017年4月20日阿里云官网发布的对象存储OSS详细价格信息。单价的变动请以阿里云官网发布的数据为准。    </p>
+</blockquote>
+<h5 id="OSS按量付费"><a href="#OSS按量付费" class="headerlink" title="OSS按量付费"></a>OSS按量付费</h5><h6 id="计算规则"><a href="#计算规则" class="headerlink" title="计算规则"></a>计算规则</h6><p>假设小王的存储Bucket选择在杭州，纯用OSS按量付费方式进行结算，则平均每个月的费用包括：</p>
+<ul>
+<li>存储费用：存储单价 x 存储量</li>
+<li>流量费用：外网流出流量忙时单价 x 流量</li>
+<li>请求费用：Put请求 + Get请求汇总的费用</li>
+</ul>
+<h6 id="计算方法"><a href="#计算方法" class="headerlink" title="计算方法"></a>计算方法</h6><p>平均每个月的费用计算如下：</p>
+<ul>
+<li>存储费用：0.148（存储单价:元/月） x 1024（存储量:GB） = 151.55 元/月</li>
+<li>流量费用：0.5（外网流出流量忙时单价）x 2048 （流量：GB） x= 1024 元/月</li>
+<li>请求费用 ：0.01（每1W次请求收费）x 1500 = 15 元/月</li>
+<li>总费用：1190.55 元/月</li>
+</ul>
+<h5 id="OSS包年包月"><a href="#OSS包年包月" class="headerlink" title="OSS包年包月"></a>OSS包年包月</h5><h6 id="计算规则-1"><a href="#计算规则-1" class="headerlink" title="计算规则"></a>计算规则</h6><p>假设小王的存储Bucket选择在杭州，纯用OSS包年包月方式进行结算，则平均每个月的费用包括：</p>
+<ul>
+<li>存储费用：存储包平均每月的费用</li>
+<li>流量费用：外网流出流量包平均每月的费用</li>
+<li>请求费用：Put请求 + Get请求汇总的费用</li>
+</ul>
+<h6 id="计算方法-1"><a href="#计算方法-1" class="headerlink" title="计算方法"></a>计算方法</h6><p>假如小王买了6个月的 1TB 存储包和 2TB 外网流出流量包，平均每个月的费用计算如下：</p>
+<ul>
+<li>存储费用：690（1TB 存储包 6个月价格:元） ÷ 6 （月） = 115 元/月</li>
+<li>流量费用：5050（2TB 外网流出流量包 6个月价格:元） ÷ 6 （月） = 841.67 元/月</li>
+<li>请求费用 ：1500 x 0.01 = 15 元/月</li>
+<li>总费用：971.67 元/月</li>
+</ul>
+<p>假如小王买了12个月的 1TB 存储包和 2TB 外网流出流量包，平均每个月的费用计算如下：</p>
+<ul>
+<li>存储费用：1242（1TB 存储包 12个月价格:元） ÷ 12 （月） = 103.5 元/月</li>
+<li>流量费用：9090（2TB 外网流出流量包 12个月价格:元） ÷ 12 （月） = 757.5 元/月</li>
+<li>请求费用 ：1500 x 0.01 = 15 元/月</li>
+<li>总费用：876 元/月</li>
+</ul>
+<h5 id="OSS-CDN组合"><a href="#OSS-CDN组合" class="headerlink" title="OSS+CDN组合"></a>OSS+CDN组合</h5><p>基于图片分享的移动应用主要的费用是存储费用和流量费用，推荐使用 OSS（存储包） + CDN 组合。CDN（内容分发网络）会将您OSS存储的热点数据分发到全国各地的节点。用户访问时只需访问最近的CDN节点读取文件，而无需访问OSS的源文件，也不会消耗OSS的外网流量。这样不仅可以提升您边缘用户的访问速度和体验，同时CDN的外网流量费用相对OSS外网流量较低，仅为OSS外网流量的50%。可有效的节省您整体应用的网络费用。</p>
+<h6 id="计算规则-2"><a href="#计算规则-2" class="headerlink" title="计算规则"></a>计算规则</h6><p>假设小王的存储Bucket选择在杭州，使用OSS（存储包）+CDN组合的方式，则平均每个月的费用包括：</p>
+<ul>
+<li>存储费用：存储包平均每月的费用</li>
+<li>流量费用：CDN公网流量费用 + CDN回源流量费用</li>
+<li>请求费用：CDN回源请求费用</li>
+</ul>
+<h6 id="计算方法-2"><a href="#计算方法-2" class="headerlink" title="计算方法"></a>计算方法</h6><p>假如小王买了12个月的 1TB 存储包，CDN回源流量 1TB，回源请求 75W (根据用户的热度情况可能回源的流量和请求次数会更少)，使用OSS+CDN组合，平均每个月的费用计算如下：</p>
+<ul>
+<li>存储费用：1242（1TB 存储包 12个月价格:元） ÷ 12 （月） = 103.5 元/月</li>
+<li>CDN公网流量费用（按量付费）: 0.272元/GB x 2048 （流量：GB）= 557.06</li>
+<li>CDN回源请求费用 （按量付费）:750 x 0.01 = 7.5 元/月</li>
+<li>CDN回源流量费用（按量付费）: 0.15元/GB （CDN回源流出流量单价）x 1024 （流量：GB）= 153.6</li>
+<li>总费用：821.66 元/月</li>
+</ul>
+<h5 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h5><p>通过以上三种计费方式的计算对比可以看出，购买资源包使用包年包月的方式将为您节省大量成本，购买资源包的时长越长优惠越多。同时如果您的OSS服务产生的费用中外网流量费用占比较大，建议您搭配使用阿里云CDN服务以进一步降低您的外网流量成本。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/OSS/" rel="tag"># OSS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/22/Android Studio/Android Studio介绍--新建as项目后的Android版本修改/" rel="next" title="新建as项目后的Android版本修改">
+                <i class="fa fa-chevron-left"></i> 新建as项目后的Android版本修改
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/27/输入法/输入法--Android-横屏时禁止输入法全屏/" rel="prev" title="Android 横屏时禁止输入法全屏">
+                Android 横屏时禁止输入法全屏 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          
+            <img class="site-author-image" itemprop="image"
+              src="http://oss.wxyass.com/avatar/shuai.jpeg"
+              alt="wxyass" />
+          
+            <p class="site-author-name" itemprop="name">wxyass</p>
+            <p class="site-description motion-element" itemprop="description">该搬砖了</p>
+        </div>
+
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives/">
+            
+                <span class="site-state-item-count">110</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">49</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">42</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#OSS"><span class="nav-number">1.</span> <span class="nav-text">OSS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CDN-CDN加速"><span class="nav-number">2.</span> <span class="nav-text">CDN(CDN加速)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#存储量"><span class="nav-number">3.</span> <span class="nav-text">存储量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#流量"><span class="nav-number">4.</span> <span class="nav-text">流量</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#外网流出流量-收费-通过互联网从-OSS-下载数据到本地端所产生的下行流量"><span class="nav-number">4.1.</span> <span class="nav-text">外网流出流量(收费):  通过互联网从 OSS 下载数据到本地端所产生的下行流量</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#内网流出流量-免费-通过阿里云内网从-OSS-下载数据到-ECS-服务器所产生的下行流量"><span class="nav-number">4.2.</span> <span class="nav-text">内网流出流量(免费):  通过阿里云内网从 OSS 下载数据到 ECS 服务器所产生的下行流量</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#外网流入流量-免费-通过互联网从本地端上传数据到-OSS-所产生的上行流量"><span class="nav-number">4.3.</span> <span class="nav-text">外网流入流量(免费) :  通过互联网从本地端上传数据到 OSS 所产生的上行流量</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#内网流入流量-免费-通过阿里云内网从-ECS-服务器上传数据到-OSS-所产生的上行流量"><span class="nav-number">4.4.</span> <span class="nav-text">内网流入流量(免费) :  通过阿里云内网从 ECS 服务器上传数据到 OSS 所产生的上行流量</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#CDN回源流出流量-收费-通过-CDN-服务层下载-OSS-的数据所产生的回源下行流量"><span class="nav-number">4.5.</span> <span class="nav-text">CDN回源流出流量(收费) :  通过 CDN 服务层下载 OSS 的数据所产生的回源下行流量</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#跨区域复制流量-收费-使用跨区域复制功能将源-Bucket-的数据同步复制到目标-Bucket-时所产生的流出流量"><span class="nav-number">4.6.</span> <span class="nav-text">跨区域复制流量(收费) : 使用跨区域复制功能将源 Bucket 的数据同步复制到目标 Bucket 时所产生的流出流量</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#请求次数"><span class="nav-number">5.</span> <span class="nav-text">请求次数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#收费案例背景"><span class="nav-number">6.</span> <span class="nav-text">收费案例背景</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#收费案例分析"><span class="nav-number">7.</span> <span class="nav-text">收费案例分析</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#OSS按量付费"><span class="nav-number">7.1.</span> <span class="nav-text">OSS按量付费</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#计算规则"><span class="nav-number">7.1.1.</span> <span class="nav-text">计算规则</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#计算方法"><span class="nav-number">7.1.2.</span> <span class="nav-text">计算方法</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#OSS包年包月"><span class="nav-number">7.2.</span> <span class="nav-text">OSS包年包月</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#计算规则-1"><span class="nav-number">7.2.1.</span> <span class="nav-text">计算规则</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#计算方法-1"><span class="nav-number">7.2.2.</span> <span class="nav-text">计算方法</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#OSS-CDN组合"><span class="nav-number">7.3.</span> <span class="nav-text">OSS+CDN组合</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#计算规则-2"><span class="nav-number">7.3.1.</span> <span class="nav-text">计算规则</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#计算方法-2"><span class="nav-number">7.3.2.</span> <span class="nav-text">计算方法</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#总结"><span class="nav-number">7.4.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">wxyass</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.2</div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
