@@ -53,7 +53,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="as报错," />
+  <meta name="keywords" content="升级报错," />
 
 
 
@@ -69,20 +69,18 @@
 
 
 
-<meta name="description" content="打开开源项目时, Android Studio 报错及解决办法">
-<meta name="keywords" content="as报错">
+<meta name="description" content="详细错误是：java.lang.IllegalStateException: Couldn’t read row 0, col 2 from CursorWindow.  Make sure the Cursor is initialized correctly before accessing data from it.出现这个原因是因为我在获取Cursor中的字段时，获取了一个不存在的字段，例">
+<meta name="keywords" content="升级报错">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Cannot find System Java Compiler. Ensure that you have installed a JDK......">
-<meta property="og:url" content="http://yoursite.com/2017/09/18/Android Studio/AS报错--Cannot find System Java Compiler. Ensure that you have installed a JDK....../index.html">
+<meta property="og:title" content="Make sure the Cursor is initialized correctly before accessing data from it.">
+<meta property="og:url" content="http://yoursite.com/2017/03/10/Android Studio/Make-sure-the-Cursor-is-initialized-correctly-before-accessing-data-from-it/index.html">
 <meta property="og:site_name" content="不忘初心">
-<meta property="og:description" content="打开开源项目时, Android Studio 报错及解决办法">
+<meta property="og:description" content="详细错误是：java.lang.IllegalStateException: Couldn’t read row 0, col 2 from CursorWindow.  Make sure the Cursor is initialized correctly before accessing data from it.出现这个原因是因为我在获取Cursor中的字段时，获取了一个不存在的字段，例">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://images.wxyass.com/wxyass/images/20170918154242.png">
-<meta property="og:updated_time" content="2017-09-29T08:01:30.000Z">
+<meta property="og:updated_time" content="2019-08-20T08:34:58.557Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Cannot find System Java Compiler. Ensure that you have installed a JDK......">
-<meta name="twitter:description" content="打开开源项目时, Android Studio 报错及解决办法">
-<meta name="twitter:image" content="http://images.wxyass.com/wxyass/images/20170918154242.png">
+<meta name="twitter:title" content="Make sure the Cursor is initialized correctly before accessing data from it.">
+<meta name="twitter:description" content="详细错误是：java.lang.IllegalStateException: Couldn’t read row 0, col 2 from CursorWindow.  Make sure the Cursor is initialized correctly before accessing data from it.出现这个原因是因为我在获取Cursor中的字段时，获取了一个不存在的字段，例">
 
 
 
@@ -112,13 +110,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/09/18/Android Studio/AS报错--Cannot find System Java Compiler. Ensure that you have installed a JDK....../"/>
+  <link rel="canonical" href="http://yoursite.com/2017/03/10/Android Studio/Make-sure-the-Cursor-is-initialized-correctly-before-accessing-data-from-it/"/>
 
 
 
 
 
-  <title>Cannot find System Java Compiler. Ensure that you have installed a JDK...... | 不忘初心</title>
+  <title>Make sure the Cursor is initialized correctly before accessing data from it. | 不忘初心</title>
   
 
 
@@ -245,7 +243,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/18/Android Studio/AS报错--Cannot find System Java Compiler. Ensure that you have installed a JDK....../">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/10/Android Studio/Make-sure-the-Cursor-is-initialized-correctly-before-accessing-data-from-it/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="wxyass">
@@ -262,7 +260,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Cannot find System Java Compiler. Ensure that you have installed a JDK......</h1>
+          <h1 class="post-title" itemprop="name headline">Make sure the Cursor is initialized correctly before accessing data from it.</h1>
         
 
         <div class="post-meta">
@@ -274,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-18T15:15:30+08:00">
-                2017-09-18
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-10T20:01:13+08:00">
+                2017-03-10
               </time>
             
 
@@ -297,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/as报错/" itemprop="url" rel="index">
-                    <span itemprop="name">as报错</span>
+                  <a href="/categories/升级报错/" itemprop="url" rel="index">
+                    <span itemprop="name">升级报错</span>
                   </a>
                 </span>
 
@@ -334,24 +332,30 @@
       
 
       
-        <p>打开开源项目时, Android Studio 报错及解决办法  </p>
-<a id="more"></a>
-<h2 id="详细报错信息如下"><strong>详细报错信息如下</strong></h2>  
-
-<pre><code>Error:Execution failed for task &apos;:app:compileDebugJavaWithJavac&apos;.
-&gt; Cannot find System Java Compiler. Ensure that you have installed a JDK(not just a 
-JRE)and configured your JAVA_HOME system variable to point to the according directory.
-</code></pre><h2 id="原因"><strong>原因</strong></h2>  
-
-<p><font color="#505050" size="3.5">  你要导入项目的gradle版本不对，要么过高要么过低，建议将gradle版本改为新建项目的gradle版本</font></p>  
-
-<h2 id="解决方案"><strong>解决方案</strong></h2>
-
-<p><font color="#505050" size="3.5">  在找到project下面的build.gradle，修改gradle版本。如果不知道具体是哪个版本，可以直接复制新建项目的build.gradle版本。</font></p>  
-
-<p>比如：将 classpath ‘com.android.tools.build:gradle:1.5.0’<br>修改为 : classpath ‘com.android.tools.build:gradle:2.3.2’      </p>
-<p>如图:<br><img src="http://images.wxyass.com/wxyass/images/20170918154242.png" alt="">   </p>
-
+        <p>详细错误是：<br>java.lang.IllegalStateException: Couldn’t read row 0, col 2 from CursorWindow.  Make sure the Cursor is initialized correctly before accessing data from it.<br>出现这个原因是因为我在获取Cursor中的字段时，获取了一个不存在的字段，例如，我原本要获取数据库book表中的bookId字段，结果获取的时候写成了bookiD，</p>
+<pre><code>while (cursor.moveToNext()) {  
+      int bookId = cursor.getInt(cursor.getColumnIndex(&quot;bookiD&quot;));          
+}
+</code></pre><p>注意：Android是区分大小写的，所以我们在获取的时候也要严格按照数据库表字段的大小写来获取数据；  </p>
+<p>问题出现比如: 创建数据库表时,字段都是大写  </p>
+<pre><code>CREATE TABLE MST_GROUPPRODUCT_M (
+    GPRODUCTID VARCHAR2(36), 
+    TERMINALCODE VARCHAR2(20), 
+    TERMINALNAME VARCHAR2(500), 
+    IFRECSTAND CHAR(1), 
+    STARTDATE DATE, 
+    ENDDATE DATE, 
+    CREATEUSERENG VARCHAR2(30), 
+    CREATEDATE DATE , 
+    UPDATEUSERENG VARCHAR2(30), 
+    UPDATETIME DATE, 
+    UPLOADFLAG VARCHAR(30), 
+    PADISCONSISTENT VARCHAR(30))
+</code></pre><p>但在读取的时候,用小写字母读取的  </p>
+<pre><code>while (cursor.moveToNext()) {  
+      int bookId = cursor.getInt(cursor.getColumnIndex(&quot;gproductid&quot;));          
+}
+</code></pre>
       
     </div>
     
@@ -368,7 +372,7 @@ JRE)and configured your JAVA_HOME system variable to point to the according dire
       
         <div class="post-tags">
           
-            <a href="/tags/as报错/" rel="tag"># as报错</a>
+            <a href="/tags/升级报错/" rel="tag"># 升级报错</a>
           
         </div>
       
@@ -381,8 +385,8 @@ JRE)and configured your JAVA_HOME system variable to point to the according dire
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/09/18/RecyclerView/RecyclerView--RecyclerView练习/" rel="next" title="RecyclerView练习">
-                <i class="fa fa-chevron-left"></i> RecyclerView练习
+              <a href="/2017/03/10/黑马卫士/黑马卫士--手机卫士笔记/" rel="next" title="手机卫士笔记">
+                <i class="fa fa-chevron-left"></i> 手机卫士笔记
               </a>
             
           </div>
@@ -391,8 +395,8 @@ JRE)and configured your JAVA_HOME system variable to point to the according dire
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/09/19/Bug问题/Bug问题--处理父控件的点击效果在子控件的区域会失效问题/" rel="prev" title="处理父控件的点击效果在子控件的区域会失效问题">
-                处理父控件的点击效果在子控件的区域会失效问题 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/03/21/自定义方法类/读取txt--读取txt文件的内容/" rel="prev" title="读取txt文件的内容1">
+                读取txt文件的内容1 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -445,17 +449,8 @@ JRE)and configured your JAVA_HOME system variable to point to the according dire
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           
             <img class="site-author-image" itemprop="image"
@@ -520,22 +515,6 @@ JRE)and configured your JAVA_HOME system variable to point to the according dire
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#详细报错信息如下"><span class="nav-number">1.</span> <span class="nav-text">详细报错信息如下</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原因"><span class="nav-number">2.</span> <span class="nav-text">原因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决方案"><span class="nav-number">3.</span> <span class="nav-text">解决方案</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       

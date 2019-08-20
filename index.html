@@ -242,7 +242,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/10/Android Studio/升级报错--Make-sure-the-Cursor-is-initialized-correctly-before-accessing-data-from-it/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/03/Android Studio/Github上提交代码/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="wxyass">
@@ -261,171 +261,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/11/10/Android Studio/升级报错--Make-sure-the-Cursor-is-initialized-correctly-before-accessing-data-from-it/" itemprop="url">Make sure the Cursor is initialized correctly before accessing data from it.</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-10T20:01:13+08:00">
-                2017-11-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/升级报错/" itemprop="url" rel="index">
-                    <span itemprop="name">升级报错</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>详细错误是：<br>java.lang.IllegalStateException: Couldn’t read row 0, col 2 from CursorWindow.  Make sure the Cursor is initialized correctly before accessing data from it.<br>出现这个原因是因为我在获取Cursor中的字段时，获取了一个不存在的字段，例如，我原本要获取数据库book表中的bookId字段，结果获取的时候写成了bookiD，</p>
-<pre><code>while (cursor.moveToNext()) {  
-      int bookId = cursor.getInt(cursor.getColumnIndex(&quot;bookiD&quot;));          
-}
-</code></pre><p>注意：Android是区分大小写的，所以我们在获取的时候也要严格按照数据库表字段的大小写来获取数据；  </p>
-<p>问题出现比如: 创建数据库表时,字段都是大写  </p>
-<pre><code>CREATE TABLE MST_GROUPPRODUCT_M (
-    GPRODUCTID VARCHAR2(36), 
-    TERMINALCODE VARCHAR2(20), 
-    TERMINALNAME VARCHAR2(500), 
-    IFRECSTAND CHAR(1), 
-    STARTDATE DATE, 
-    ENDDATE DATE, 
-    CREATEUSERENG VARCHAR2(30), 
-    CREATEDATE DATE , 
-    UPDATEUSERENG VARCHAR2(30), 
-    UPDATETIME DATE, 
-    UPLOADFLAG VARCHAR(30), 
-    PADISCONSISTENT VARCHAR(30))
-</code></pre><p>但在读取的时候,用小写字母读取的  </p>
-<pre><code>while (cursor.moveToNext()) {  
-      int bookId = cursor.getInt(cursor.getColumnIndex(&quot;gproductid&quot;));          
-}
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/03/Android Studio/Android Studio介绍--Github上提交代码/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="wxyass">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://oss.wxyass.com/avatar/shuai.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="不忘初心">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/03/Android Studio/Android Studio介绍--Github上提交代码/" itemprop="url">Github上提交代码</a></h1>
+                <a class="post-title-link" href="/2017/11/03/Android Studio/Github上提交代码/" itemprop="url">Github上提交代码</a></h1>
         
 
         <div class="post-meta">
@@ -501,7 +337,7 @@
           <p>通过Android studio在Github上提交及更新代码  </p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/11/03/Android Studio/Android Studio介绍--Github上提交代码/#more" rel="contents">
+            <a class="btn" href="/2017/11/03/Android Studio/Github上提交代码/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -993,7 +829,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/26/Android Studio/Android Studio介绍--解决Android-Studio-Gradle-错误-编码GBK的不可映射字符/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/26/Android Studio/解决Android-Studio-Gradle-错误-编码GBK的不可映射字符/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="wxyass">
@@ -1012,7 +848,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/10/26/Android Studio/Android Studio介绍--解决Android-Studio-Gradle-错误-编码GBK的不可映射字符/" itemprop="url">解决Android Studio Gradle 错误 编码GBK的不可映射字符</a></h1>
+                <a class="post-title-link" href="/2017/10/26/Android Studio/解决Android-Studio-Gradle-错误-编码GBK的不可映射字符/" itemprop="url">解决Android Studio Gradle 错误 编码GBK的不可映射字符</a></h1>
         
 
         <div class="post-meta">
@@ -1088,7 +924,7 @@
           <p>转载: <a href="http://blog.csdn.net/whu_zhangmin/article/details/46468061" target="_blank" rel="external">http://blog.csdn.net/whu_zhangmin/article/details/46468061</a>  </p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/10/26/Android Studio/Android Studio介绍--解决Android-Studio-Gradle-错误-编码GBK的不可映射字符/#more" rel="contents">
+            <a class="btn" href="/2017/10/26/Android Studio/解决Android-Studio-Gradle-错误-编码GBK的不可映射字符/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1407,7 +1243,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/26/Android Studio/Android模板--Android常用相关权限/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/26/Android Studio/Android常用相关权限/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="wxyass">
@@ -1426,7 +1262,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/09/26/Android Studio/Android模板--Android常用相关权限/" itemprop="url">Android常用相关权限</a></h1>
+                <a class="post-title-link" href="/2017/09/26/Android Studio/Android常用相关权限/" itemprop="url">Android常用相关权限</a></h1>
         
 
         <div class="post-meta">
@@ -1505,7 +1341,7 @@
 </code></pre>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/09/26/Android Studio/Android模板--Android常用相关权限/#more" rel="contents">
+            <a class="btn" href="/2017/09/26/Android Studio/Android常用相关权限/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1556,7 +1392,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/25/Android Studio/Android Studio介绍--新建as工程的build-gradle/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/25/Android Studio/新建as工程的build-gradle/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="wxyass">
@@ -1575,7 +1411,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/09/25/Android Studio/Android Studio介绍--新建as工程的build-gradle/" itemprop="url">新建as工程的build.gradle</a></h1>
+                <a class="post-title-link" href="/2017/09/25/Android Studio/新建as工程的build-gradle/" itemprop="url">新建as工程的build.gradle</a></h1>
         
 
         <div class="post-meta">
@@ -1651,7 +1487,7 @@
           <p>从网络上下载的项目,有时会报错,修改build.gradle试一下.  </p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/09/25/Android Studio/Android Studio介绍--新建as工程的build-gradle/#more" rel="contents">
+            <a class="btn" href="/2017/09/25/Android Studio/新建as工程的build-gradle/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -2123,7 +1959,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/18/Android Studio/AS报错--Cannot find System Java Compiler. Ensure that you have installed a JDK....../">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/18/Android Studio/Cannot find System Java Compiler. Ensure that you have installed a JDK....../">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="wxyass">
@@ -2142,7 +1978,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/09/18/Android Studio/AS报错--Cannot find System Java Compiler. Ensure that you have installed a JDK....../" itemprop="url">Cannot find System Java Compiler. Ensure that you have installed a JDK......</a></h1>
+                <a class="post-title-link" href="/2017/09/18/Android Studio/Cannot find System Java Compiler. Ensure that you have installed a JDK....../" itemprop="url">Cannot find System Java Compiler. Ensure that you have installed a JDK......</a></h1>
         
 
         <div class="post-meta">
@@ -2218,7 +2054,7 @@
           <p>打开开源项目时, Android Studio 报错及解决办法  </p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/09/18/Android Studio/AS报错--Cannot find System Java Compiler. Ensure that you have installed a JDK....../#more" rel="contents">
+            <a class="btn" href="/2017/09/18/Android Studio/Cannot find System Java Compiler. Ensure that you have installed a JDK....../#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -2373,6 +2209,153 @@ compile &apos;com.android.support:recyclerview-v7:26.0.0-alpha1&apos;
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/09/18/RecyclerView/RecyclerView--RecyclerView练习/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/08/图片处理/图片处理--Android图片压缩终极解决方案/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wxyass">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oss.wxyass.com/avatar/shuai.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不忘初心">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/09/08/图片处理/图片处理--Android图片压缩终极解决方案/" itemprop="url">Android图片压缩终极解决方案</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-08T11:47:29+08:00">
+                2017-09-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/图片处理/" itemprop="url" rel="index">
+                    <span itemprop="name">图片处理</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>转载: <a href="http://blog.csdn.net/lsyz0021/article/details/51297269#comments" target="_blank" rel="external">http://blog.csdn.net/lsyz0021/article/details/51297269#comments</a>  </p>
+<p>没错，第一篇技术博客就给大家带来一重磅炸弹，绝对实用，图片压缩，在这里你将看到2.5M如何无损的变为200多kb,差不多十分之一吧，重点，请注意重点，无损，无损，无损！</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/09/08/图片处理/图片处理--Android图片压缩终极解决方案/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
